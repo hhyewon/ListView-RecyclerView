@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#212121"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/top_bar_ll"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#4F2E6F"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/top_menu" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/top_logo" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/top_alarm" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/user_menu_ll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#4F2E6F"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_ll">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:adjustViewBounds="true"
+            android:src="@drawable/pink_club" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/name_cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <View
+                android:id="@+id/user_name_vi"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/name_cl"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/name_cl" />
+
+            <TextView
+                android:id="@+id/user_name1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="누구보다 괜찮은,  "
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/name_cl"
+                app:layout_constraintLeft_toLeftOf="@+id/user_name_vi"
+                app:layout_constraintTop_toTopOf="@+id/name_cl" />
+
+            <TextView
+                android:id="@+id/user_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="양혜원"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/user_name1"
+                app:layout_constraintBottom_toBottomOf="@+id/name_cl"
+                app:layout_constraintLeft_toRightOf="@+id/user_name1"
+                app:layout_constraintTop_toTopOf="@+id/name_cl" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  님"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/user_name1"
+                app:layout_constraintBottom_toBottomOf="@+id/name_cl"
+                app:layout_constraintLeft_toRightOf="@+id/user_name2"
+                app:layout_constraintTop_toTopOf="@+id/name_cl" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/card_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_menu_ll">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card_cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_bottom2"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="15dp">
+
+            <ImageView
+                android:id="@+id/card_vi"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/card_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/card_cl"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/card_cl" />
+
+            <TextView
+                android:id="@+id/card_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="커피빈카드"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/card_cl"
+                app:layout_constraintLeft_toRightOf="@+id/card_vi"
+                app:layout_constraintTop_toTopOf="@+id/card_cl"
+
+                />
+
+            <TextView
+                android:id="@+id/card_prize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="0원"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/card_cl"
+                app:layout_constraintRight_toLeftOf="@+id/card_more"
+                app:layout_constraintTop_toTopOf="@+id/card_cl" />
+
+            <ImageView
+                android:id="@+id/card_more"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/bottom_more"
+                app:layout_constraintBottom_toBottomOf="@id/card_cl"
+                app:layout_constraintRight_toRightOf="@id/card_cl"
+                app:layout_constraintTop_toTopOf="@+id/card_cl" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/purple_card_cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_bottom2"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="15dp">
+
+            <ImageView
+                android:id="@+id/purple_card_vi"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/purple_card_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/purple_card_cl"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/purple_card_cl" />
+
+            <TextView
+                android:id="@+id/purple_card_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="퍼플카드"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/purple_card_cl"
+                app:layout_constraintLeft_toRightOf="@+id/purple_card_vi"
+                app:layout_constraintTop_toTopOf="@+id/purple_card_cl"
+
+                />
+
+            <TextView
+                android:id="@+id/purple_card_prize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="0 / 12"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/purple_card_cl"
+                app:layout_constraintRight_toLeftOf="@+id/purple_card_more"
+                app:layout_constraintTop_toTopOf="@+id/purple_card_cl" />
+
+            <ImageView
+                android:id="@+id/purple_card_more"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/bottom_more"
+                app:layout_constraintBottom_toBottomOf="@id/purple_card_cl"
+                app:layout_constraintRight_toRightOf="@id/purple_card_cl"
+                app:layout_constraintTop_toTopOf="@+id/purple_card_cl" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ver_half_gl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hori_half_gl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6"/>
+
+    <View
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginVertical="10dp"
+        android:id="@+id/purple_order_vi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/bar_1"
+        app:layout_constraintLeft_toLeftOf="@+id/ver_half_gl"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hori_half_gl"
+        />
+
+    <ImageView
+        android:id="@+id/purple_order_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/purple_order_icon"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintDimensionRatio="1:3.5"
+        app:layout_constraintTop_toTopOf="@id/purple_order_vi"
+        app:layout_constraintBottom_toBottomOf="@+id/purple_order_vi"
+        app:layout_constraintLeft_toLeftOf="@+id/purple_order_vi"
+        android:adjustViewBounds="true"
+        />
+    <TextView
+        android:id="@+id/purple_order_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="퍼플오더"
+        android:textStyle="bold"
+        android:textColor="#C48BEA"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="@id/purple_order_vi"
+        app:layout_constraintBottom_toBottomOf="@id/purple_order_vi"
+        app:layout_constraintRight_toLeftOf="@+id/purple_order_more"
+        />
+    <ImageView
+        android:id="@+id/purple_order_more"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:0.5"
+        app:layout_constraintTop_toTopOf="@id/purple_order_vi"
+        app:layout_constraintBottom_toBottomOf="@id/purple_order_vi"
+        android:src="@drawable/purple_order_more"
+        app:layout_constraintRight_toRightOf="@id/purple_order_vi"
+        />
+
+
+    <View
+        android:id="@+id/bar_1"
+
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/my_menu_vi"
+        app:layout_constraintLeft_toLeftOf="@+id/ver_half_gl"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/purple_order_vi"
+        android:background="#363636"
+        />
+    <View
+        android:id="@+id/my_menu_vi"
+        android:layout_marginLeft="5dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bar_1"
+        app:layout_constraintBottom_toTopOf="@+id/bar_2"
+        app:layout_constraintLeft_toLeftOf="@+id/ver_half_gl"/>
+
+
+    <ImageView
+        android:id="@+id/my_menu_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/my_menu_icon"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintDimensionRatio="1:3"
+        app:layout_constraintTop_toTopOf="@id/my_menu_vi"
+        app:layout_constraintBottom_toBottomOf="@+id/my_menu_vi"
+        app:layout_constraintLeft_toLeftOf="@+id/my_menu_vi"
+        android:adjustViewBounds="true"
+        />
+    <TextView
+        android:id="@+id/my_menu_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나만의 메뉴"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="@id/my_menu_vi"
+        app:layout_constraintBottom_toBottomOf="@id/my_menu_vi"
+        app:layout_constraintRight_toLeftOf="@+id/my_menu_more"
+        />
+    <ImageView
+        android:id="@+id/my_menu_more"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:0.5"
+        app:layout_constraintTop_toTopOf="@id/my_menu_vi"
+        app:layout_constraintBottom_toBottomOf="@id/my_menu_vi"
+        android:src="@drawable/menu_more"
+        app:layout_constraintRight_toRightOf="@id/my_menu_vi"
+        />
+
+
+    <View
+        android:id="@+id/bar_2"
+        android:layout_marginLeft="5dp"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/present_vi"
+        app:layout_constraintLeft_toLeftOf="@+id/ver_half_gl"
+        app:layout_constraintTop_toBottomOf="@id/my_menu_vi"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="#363636"
+        />
+    <View
+        android:layout_marginLeft="5dp"
+        android:id="@+id/present_vi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/ver_half_gl"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bar_2"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/present_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/present_icon"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintDimensionRatio="1:3"
+        app:layout_constraintTop_toTopOf="@id/present_vi"
+        app:layout_constraintBottom_toBottomOf="@+id/present_vi"
+        app:layout_constraintLeft_toLeftOf="@+id/present_vi"
+        android:adjustViewBounds="true"
+        />
+    <TextView
+        android:id="@+id/present_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선물하기"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/present_vi"
+        app:layout_constraintBottom_toBottomOf="@id/present_vi"
+        app:layout_constraintRight_toLeftOf="@+id/present_more"
+        />
+    <ImageView
+        android:id="@+id/present_more"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:0.5"
+        app:layout_constraintTop_toTopOf="@id/present_vi"
+        app:layout_constraintBottom_toBottomOf="@id/present_vi"
+        android:src="@drawable/menu_more"
+        app:layout_constraintRight_toRightOf="@id/present_vi"
+        />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
