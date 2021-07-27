@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="30dp">
+
+
+    <CheckBox
+        android:id="@+id/my_menu_item_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/my_menu_item_iv"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:scaleType="centerInside"
+        android:paddingRight="20dp"
+        android:adjustViewBounds="true"
+        android:id="@+id/my_menu_item_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/bag_menu1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/my_menu_item_cb"
+        app:layout_constraintRight_toLeftOf="@+id/my_menu_item_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/my_menu_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(S)헤이즐넛 아이스 커피"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/my_menu_item_price"
+        app:layout_constraintLeft_toRightOf="@+id/my_menu_item_iv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/my_menu_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="6,000원"
+        android:textColor="#4F2E6F"
+        android:textSize="13sp"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toTopOf="@+id/my_menu_item_size"
+        app:layout_constraintLeft_toRightOf="@+id/my_menu_item_iv"
+        app:layout_constraintTop_toBottomOf="@+id/my_menu_item_name"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/my_menu_item_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Small 일회용컵"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/my_menu_item_iv"
+        app:layout_constraintTop_toBottomOf="@+id/my_menu_item_price"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/adjust_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:0.7"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
