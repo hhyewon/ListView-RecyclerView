@@ -1,10 +1,13 @@
 package com.example.rp_week3
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.BaseAdapter
+import androidx.core.content.ContextCompat.startActivity
 import com.example.rp_week3.databinding.MyMenuItemBinding
 
 
@@ -29,12 +32,17 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
         // << 이걸 하기 위해서는 inflate 라는 작업이 필요하다.
         // 그래서 inflater를 통해 시스템에 대한 권한을 부여받고 (xml을 메모리에 올려 주는 것)
 
-
-//        val view=convertView // 리턴 타입 자동으로 추론
 //
+//        val view=convertView // 리턴 타입 자동으로 추론
+////
 //        return view
 
 
+
+//  리스트뷰의 아이템 객체잔하여 겟뷰가?  네 거기가 그럼 체크박스부터 =ㅡ 까지?  그 뷰를 눌렀을때  클릭리스너  VIew의 컨텍스트가지고 새로운 인텐트시작?
+       // ㅣ신기하네
+        //근데 왜 MyMenuActivity 저기선 안되고 여기서는 되는ㄱㅇㅇ??여기는 근데 사실 좀
+        // 세부적인거 설정할떄 하는거고 저기서 온 아이템뭐시기 그거는 아이템 자체를 눌렀을때하ㅣ는건데 왜안되는지 한번 확인하러가시죠
         binding = MyMenuItemBinding.inflate(inflater, parent, false)
 //        binding.myMenuItemIv.imageAlpha=MyMenuArrayList[position].img
         binding.myMenuItemIv.setImageResource(MyMenuArrayList[position].img)
@@ -42,6 +50,15 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
         binding.myMenuItemPrice.text = MyMenuArrayList[position].price
         binding.myMenuItemSize.text = MyMenuArrayList[position].size
         binding.myMenuItemCb.isChecked = MyMenuArrayList[position].checked
+
+        binding.itemCl.setOnClickListener {
+            var intent  = Intent(convertView?.context, ClickActivity::class.java)
+            intent.putExtra("name", MyMenuArrayList[position].name)
+            intent.putExtra("img", MyMenuArrayList[position].img)
+            intent.putExtra("size", MyMenuArrayList[position].size)
+            intent.putExtra("price", MyMenuArrayList[position].price)
+            convertView?.context?.startActivity(intent)
+        }
 
         //        binding.myMenuItemCb.isChecked = MyMenuArrayList[num].checked
 //
@@ -106,9 +123,6 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
     }
 
 
-    fun isChecked(position: Int): Boolean {
-        return MyMenuArrayList[position].checked
-    }
 
 
 }

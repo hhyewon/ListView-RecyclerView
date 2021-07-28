@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:paddingHorizontal="20dp"
     android:paddingTop="20dp"
-    android:paddingBottom="30dp">
+    android:paddingBottom="30dp"
+    android:id="@+id/item_cl">
 
 
     <CheckBox

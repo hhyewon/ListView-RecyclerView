@@ -18,6 +18,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+
+        binding.presentVi.setOnClickListener {
+            intent= Intent(this, ClickActivity::class.java)
+            startActivity(intent)
+        }
+
+
         binding.purpleOrderVi.setOnClickListener {
             intent= Intent(this, PurpleOrderActivity::class.java)
             startActivity(intent)
