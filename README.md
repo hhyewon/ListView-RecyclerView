@@ -51,3 +51,12 @@ override fun getView(position: Int, convertView: View?, parent: ViewGroup?): Vie
 
 android:descendantFocusability="blocksDescendants"   //특정 뷰로 포커스되는 현상을 막아준다.
 ```
+
+
+
+## 그 외 구현한 기능들
+> ListView     
+### 1. 전체 선택 버튼을 누르면 List Item의 체크박스가 전부 선택 되도록 했다.
+
+
+
