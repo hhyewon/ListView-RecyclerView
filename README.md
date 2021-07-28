@@ -31,5 +31,4 @@ binding.myMenuItemCb.isChecked = isChecked(position) // 그 값을 체크박스�
 **my_menu_item.xml**
 
 android:descendantFocusability="blocksDescendants"   //특정 뷰로 포커스되는 현상을 막아준다.
-
 ```
