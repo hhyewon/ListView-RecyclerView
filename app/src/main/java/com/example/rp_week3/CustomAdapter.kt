@@ -77,7 +77,6 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
 
 
 
-
 //        class checkboxData(
 //            var id: Long,
 //            val checked: Boolean
