@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="퍼플오더"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/top_bar_vi"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -143,7 +143,6 @@
         app:tabSelectedTextColor="#4F2E6F"
         app:tabMode="scrollable"
         app:tabRippleColor="@null"
-
         >
 
         <com.google.android.material.tabs.TabItem

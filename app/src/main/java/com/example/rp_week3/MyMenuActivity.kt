@@ -57,6 +57,7 @@ class MyMenuActivity : AppCompatActivity() {
             )
         )
 
+
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu16,
