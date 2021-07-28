@@ -16,8 +16,6 @@ fun isChecked(position: Int): Boolean {
             return MyMenuArrayList[position].checked
         }
 
-binding.myMenuItemCb.isChecked= MyMenuArrayList[position].checked
-
         binding.myMenuItemCb.setOnClickListener {
             val newState: Boolean = !MyMenuArrayList[position].checked //check->uncheck, uncheck -> check로 바꿔 저장
             MyMenuArrayList[position].checked = newState
