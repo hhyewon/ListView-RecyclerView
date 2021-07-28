@@ -26,7 +26,20 @@ binding.myMenuItemCb.isChecked = isChecked(position) // 그 값을 체크박스�
 ### 2. ListView Item 클릭
   - 문제 🤦‍ | istView를 클릭 시 상세 액티비티로 넘어가야 하는데, 클릭이 되지 않는 문제 발생 // 체크박스는 정상 동작
   - 원인 💁‍ | 각 Item이 여러 View들을 조합한 Layout일 때, ListView를 클릭하면 List Item이 클릭되는게 아니라 표면의 View가 클릭되는 걸로 인식한다.
-  - 해결 🙆‍ | 루트 레이아웃에 다음과 같은 코드를 추가하여 해결 ! 
+  - 해결 (1) 🙆‍ | Adapter에 바로 코드를 작성하여 해결 !  
+```
+**CustomAdapter.kr**
+
+        binding.itemCl.setOnClickListener {
+            var intent  = Intent(convertView?.context, ClickActivity::class.java)
+            intent.putExtra("name", MyMenuArrayList[position].name)
+            intent.putExtra("img", MyMenuArrayList[position].img)
+            intent.putExtra("size", MyMenuArrayList[position].size)
+            intent.putExtra("price", MyMenuArrayList[position].price)
+            convertView?.context?.startActivity(intent)
+        }
+```
+  - 해결 (2) 🙆‍ | 루트 레이아웃에 다음과 같은 코드를 추가하여 해결 ! 
 ```
 **my_menu_item.xml**
 
