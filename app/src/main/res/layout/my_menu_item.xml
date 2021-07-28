@@ -6,7 +6,9 @@
     android:paddingHorizontal="20dp"
     android:paddingTop="20dp"
     android:paddingBottom="30dp"
-    android:id="@+id/item_cl">
+    android:id="@+id/item_cl"
+    android:descendantFocusability="blocksDescendants"
+    >
 
 
     <CheckBox
