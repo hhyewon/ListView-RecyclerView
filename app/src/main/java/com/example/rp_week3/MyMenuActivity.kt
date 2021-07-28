@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ListView
 import android.widget.Toast
@@ -213,7 +214,7 @@ class MyMenuActivity : AppCompatActivity() {
 
 
 //        binding.myMenuLv.onItemClickListener =
-//            OnItemClickListener { parent, view, position, id -> // 상세정보 화면으로 이동하기(인텐트 날리기)
+//            OnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long -> // 상세정보 화면으로 이동하기(인텐트 날리기)
 //                intent = Intent(this, ClickActivity::class.java)
 //
 //                intent.putExtra("name", MyMenuArrayList[position].name)
@@ -225,37 +226,19 @@ class MyMenuActivity : AppCompatActivity() {
 //            }
 
 
-//        binding.myMenuLv.onItemClickListener =
-//            OnItemClickListener { parent, view, position: Int, id -> // 상세정보 화면으로 이동하기(인텐트 날리기)
-//                intent = Intent(this, ClickActivity::class.java)
-//
-//                intent.putExtra("name", MyMenuArrayList[position].name)
-//                intent.putExtra("img", MyMenuArrayList[position].img)
-//                intent.putExtra("price", MyMenuArrayList[position].price)
-//                intent.putExtra("size", MyMenuArrayList[position].size)
-//
-//                startActivity(intent)
-//            }
+        binding.myMenuLv.onItemClickListener =
+            OnItemClickListener { parent, view, position: Int, id -> // 상세정보 화면으로 이동하기(인텐트 날리기)
+                intent = Intent(this, ClickActivity::class.java)
+
+                intent.putExtra("name", MyMenuArrayList[position].name)
+                intent.putExtra("img", MyMenuArrayList[position].img)
+                intent.putExtra("price", MyMenuArrayList[position].price)
+                intent.putExtra("size", MyMenuArrayList[position].size)
+
+                startActivity(intent)
+            }
 
 
-//        binding.myMenuLv.setOnItemClickListener(OnItemClickListener { parent, view, position, id -> // 리스트 뷰를 누를 때 EditActivity 로 넘어가야한다.
-//            // 이때 클릭된 값에 해당하는 title 과, contents 를 그대로 넘겨 줘야 한다.
-//            val check_position: Int = binding.myMenuLv.getCheckedItemPosition() //리스트 뷰의 포지션을 가져옴.
-//            val vo: CustomAdapter = parent.adapter.getItem(position) as CustomAdapter //리스트 뷰의 포지션 가져옴.
-//            val t_title: String = vo.getTitle()
-//            val c_contents: String = vo.getContents()
-//            val intent = Intent(this@MainActivity, EditActivity::class.java)
-//            intent.putExtra("title", t_title)
-//            intent.putExtra("contents", c_contents)
-//            intent.putExtra("position", position)
-//            startActivity(intent)
-//            finish()
-//        })
-
-//        binding.myMenuLv.setOnItemClickListener(OnItemClickListener { adapterView, view, position, l ->
-//            val data = adapterView.getItemAtPosition(position) as String
-//            tvSelect.setText(data)
-//        })
 
 
 //       binding.myMenuLv.setOnItemClickListener { parent, view, position, id ->
@@ -283,13 +266,6 @@ class MyMenuActivity : AppCompatActivity() {
 //        }
 
 
-
-//        binding.myMenuLv.setOnClickListener {
-//            intent = Intent(this, ClickActivity::class.java)
-//            startActivity(intent)
-//        }
-
-//
 //
 //        binding.myMenuLv.setOnItemClickListener { parent, view, position, id ->
 //
@@ -304,11 +280,6 @@ class MyMenuActivity : AppCompatActivity() {
 //            startActivity(intent)
 //
 //        }
-
-
-
-
-
 
 
 

@@ -62,7 +62,7 @@
 
     <LinearLayout
         android:id="@+id/menu_ll"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
@@ -90,39 +90,53 @@
             android:scaleType="centerInside"
             android:src="@drawable/bag_menu1" />
 
-        <TextView
-            android:id="@+id/my_menu_item_price"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_cl"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="6,000원"
-            android:textColor="#4F2E6F"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_marginHorizontal="20dp">
+
+            <TextView
+                android:id="@+id/my_menu_item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:paddingBottom="10dp"
+                android:text="6,000원"
+                android:textColor="#4F2E6F"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/menu_cl"
+                app:layout_constraintLeft_toLeftOf="@+id/menu_cl"
+                app:layout_constraintRight_toLeftOf="@+id/pen"
+                app:layout_constraintTop_toTopOf="@+id/menu_cl"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <ImageView
+                android:id="@+id/pen"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/pen"
+                app:layout_constraintBottom_toBottomOf="@+id/menu_cl"
+
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toRightOf="@+id/my_menu_item_price"
+                app:layout_constraintRight_toRightOf="@+id/menu_cl"
+                app:layout_constraintTop_toTopOf="@+id/menu_cl"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/my_menu_item_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="Small 일회용컵"
             android:textColor="@color/black"
             android:textSize="15.5sp"
             android:textStyle="bold" />
 
     </LinearLayout>
-
-    <ImageView
-        android:padding="14dp"
-
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:adjustViewBounds="true"
-        android:paddingBottom="20dp"
-        android:src="@drawable/pen"
-        app:layout_constraintBottom_toBottomOf="@+id/menu_ll"
-        app:layout_constraintLeft_toRightOf="@+id/menu_ll"
-        app:layout_constraintRight_toRightOf="parent" />
 
 
     <View
@@ -181,10 +195,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="1"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:layout_width="23dp"
@@ -230,19 +243,19 @@
 
         <LinearLayout
 
-            android:weightSum="2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <androidx.cardview.widget.CardView
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="12dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="5dp"
 
 
@@ -257,18 +270,17 @@
                     android:paddingVertical="11dp"
                     android:text="장바구니"
                     android:textColor="#4F2E6F"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_weight="1"
-
                 android:layout_width="wrap_content"
+
                 android:layout_height="match_parent"
-                app:cardCornerRadius="5dp"
-                android:backgroundTint="#4F2E6F">
+                android:layout_weight="1"
+                android:backgroundTint="#4F2E6F"
+                app:cardCornerRadius="5dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -279,7 +291,7 @@
                     android:paddingVertical="11dp"
                     android:text="바로주문"
                     android:textColor="@color/white"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </androidx.cardview.widget.CardView>
 
