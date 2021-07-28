@@ -32,94 +32,47 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
         // << 이걸 하기 위해서는 inflate 라는 작업이 필요하다.
         // 그래서 inflater를 통해 시스템에 대한 권한을 부여받고 (xml을 메모리에 올려 주는 것)
 
-//
 //        val view=convertView // 리턴 타입 자동으로 추론
-////
+//
 //        return view
 
-
-
-
         binding = MyMenuItemBinding.inflate(inflater, parent, false)
-//        binding.myMenuItemIv.imageAlpha=MyMenuArrayList[position].img
         binding.myMenuItemIv.setImageResource(MyMenuArrayList[position].img)
         binding.myMenuItemName.text = MyMenuArrayList[position].name
         binding.myMenuItemPrice.text = MyMenuArrayList[position].price
         binding.myMenuItemSize.text = MyMenuArrayList[position].size
         binding.myMenuItemCb.isChecked = MyMenuArrayList[position].checked
 
-//        binding.itemCl.setOnClickListener {
-//            var intent  = Intent(convertView?.context, ClickActivity::class.java)
-//            intent.putExtra("name", MyMenuArrayList[position].name)
-//            intent.putExtra("img", MyMenuArrayList[position].img)
-//            intent.putExtra("size", MyMenuArrayList[position].size)
-//            intent.putExtra("price", MyMenuArrayList[position].price)
-//            convertView?.context?.startActivity(intent)
-//        }
 
-        //        binding.myMenuItemCb.isChecked = MyMenuArrayList[num].checked
-//
-//        binding.myMenuItemCb.setOnCheckedChangeListener {
-//            if(binding.myMenuItemCb.isChecked){
-//                MyMenuArrayList[num]
-//            }
-//        }
-
-//
-//        binding.myMenuItemCb.isChecked = (DocPath.parent as ListView).isItemChecked(position)
-//        binding.myMenuItemCb.isChecked = ((ListView)parent).isItemChecked(position);
-//
-//
-//        binding.myMenuItemCb.isChecked = (DocPath.parent as ListView).isItemChecked(position);
-//
-
-//        binding.myMenuItemCb.setOnClickListener {
-//
-//            var newState = !MyMenuArrayList.get(position).isChecked()
-//             newState = !MyMenuArrayList.get(position).isChecked()
-//            MyMenuArrayList.get(position).isChecked() = newState
-//        }
+        /*
+        // 새 액티비티에 값 넘겨주고 호출하는 다른 방법 !!
+        binding.itemCl.setOnClickListener {
+            var intent  = Intent(convertView?.context, ClickActivity::class.java)
+            intent.putExtra("name", MyMenuArrayList[position].name)
+            intent.putExtra("img", MyMenuArrayList[position].img)
+            intent.putExtra("size", MyMenuArrayList[position].size)
+            intent.putExtra("price", MyMenuArrayList[position].price)
+            convertView?.context?.startActivity(intent)
+        }
+        */
 
 
-//        binding.myMenuItemCb.isChecked  = MyMenuArrayList[position].checked
-//        binding.myMenuItemCb.setOnCheckedChangeListener { buttonView, isChecked ->
-//            MyMenuArrayList[position].checked = isChecked
-//
-//
-//        }
-
-
-
-
-//        class checkboxData(
-//            var id: Long,
-//            val checked: Boolean
-//        )
-        fun isChecked(position: Int): Boolean {
+        fun isChecked(position: Int): Boolean {  //체크박스 상태
             return MyMenuArrayList[position].checked
         }
 
-        binding.myMenuItemCb.isChecked= MyMenuArrayList[position].checked
-
+//        binding.myMenuItemCb.isChecked = MyMenuArrayList[position].checked
 
         binding.myMenuItemCb.setOnClickListener {
-            val newState: Boolean = !MyMenuArrayList[position].checked //check->uncheck, uncheck -> check로 바꿔 저장
+            val newState: Boolean =
+                !MyMenuArrayList[position].checked //check->uncheck, uncheck -> check로 바꿔 저장
             MyMenuArrayList[position].checked = newState
         }
 
-
-//        binding.myMenuItemCb.setOnCheckedChangeListener { buttonView, isChecked ->
-//
-//            MyMenuArrayList[position].checked =newState
-//        }
-//        checked
-
         binding.myMenuItemCb.isChecked = isChecked(position) // 그 값을 체크박스에 저장하여 체크된 것들이 그대로 남아있도록 함
-//        binding.myMenuItemCb.setOnCheckedChangeListener(isChecked(position))
+
         return binding.root
     }
-
-
 
 
 }

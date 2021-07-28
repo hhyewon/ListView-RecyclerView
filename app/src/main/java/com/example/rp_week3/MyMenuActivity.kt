@@ -2,12 +2,9 @@ package com.example.rp_week3
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ListView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rp_week3.databinding.MyMenuBinding
 import com.example.rp_week3.databinding.MyMenuItemBinding
@@ -65,8 +62,6 @@ class MyMenuActivity : AppCompatActivity() {
                 "Small 일회용컵", false
             )
         )
-
-
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu16,
@@ -213,19 +208,6 @@ class MyMenuActivity : AppCompatActivity() {
         binding.myMenuLv.adapter = customAdapter
 
 
-//        binding.myMenuLv.onItemClickListener =
-//            OnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long -> // 상세정보 화면으로 이동하기(인텐트 날리기)
-//                intent = Intent(this, ClickActivity::class.java)
-//
-//                intent.putExtra("name", MyMenuArrayList[position].name)
-//                intent.putExtra("img", MyMenuArrayList[position].img)
-//                intent.putExtra("price", MyMenuArrayList[position].price)
-//                intent.putExtra("size", MyMenuArrayList[position].size)
-//
-//                startActivity(intent)
-//            }
-
-
         binding.myMenuLv.onItemClickListener =
             OnItemClickListener { parent, view, position: Int, id -> // 상세정보 화면으로 이동하기(인텐트 날리기)
                 intent = Intent(this, ClickActivity::class.java)
@@ -240,50 +222,6 @@ class MyMenuActivity : AppCompatActivity() {
 
 
 
-
-//       binding.myMenuLv.setOnItemClickListener { parent, view, position, id ->
-//            Toast.makeText(this,MyMenuArrayList[position].name, Toast.LENGTH_SHORT).show()
-//            intent = Intent(this, ClickActivity::class.java)
-//
-//            intent.putExtra("name", MyMenuArrayList[position].name)
-//            intent.putExtra("img", MyMenuArrayList[position].img)
-//            intent.putExtra("size", MyMenuArrayList[position].size)
-//            intent.putExtra("price", MyMenuArrayList[position].price)
-//
-//            startActivity(intent)
-//
-//        }
-
-//        binding.myMenuLv.setOnItemClickListener { parent, view, position, id ->
-//            intent = Intent(this, ClickActivity::class.java)
-//
-//            intent.putExtra("name", MyMenuArrayList[position].name)
-//            intent.putExtra("img", MyMenuArrayList[position].img)
-//            intent.putExtra("price", MyMenuArrayList[position].price)
-//            intent.putExtra("size", MyMenuArrayList[position].size)
-//            startActivity(intent)
-//
-//        }
-
-
-//
-//        binding.myMenuLv.setOnItemClickListener { parent, view, position, id ->
-//
-//
-//            intent = Intent(this, ClickActivity::class.java)
-//
-//            intent.putExtra("name", MyMenuArrayList[position].name)
-//            intent.putExtra("img", MyMenuArrayList[position].img)
-//            intent.putExtra("price", MyMenuArrayList[position].price)
-//            intent.putExtra("size", MyMenuArrayList[position].size)
-//
-//            startActivity(intent)
-//
-//        }
-
-
-
-
         binding.allCb.setOnClickListener { //전체 선택
             var count =0
             count = binding.myMenuLv.adapter.count
@@ -291,9 +229,7 @@ class MyMenuActivity : AppCompatActivity() {
                 binding.myMenuLv.setItemChecked(i, isChecked())
             }
             customAdapter.notifyDataSetChanged();
-
         }
-
 
     }
 
