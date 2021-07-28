@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="퍼플오더"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/top_bar_vi"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -48,7 +48,7 @@
         android:layout_marginRight="20dp"
         android:src="@drawable/bag"
         app:layout_constraintBottom_toBottomOf="@+id/top_bar_vi"
-        app:layout_constraintDimensionRatio="1:2"
+        app:layout_constraintDimensionRatio="1:2.7"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintLeft_toRightOf="@+id/top_bar_txt"
         app:layout_constraintRight_toRightOf="parent"
@@ -102,7 +102,7 @@
         app:layout_constraintTop_toTopOf="@+id/top_store2" />
 
     <com.google.android.material.tabs.TabLayout
-
+        app:tabRippleColor="@null"
         android:id="@+id/menu_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -131,6 +131,7 @@
     </com.google.android.material.tabs.TabLayout>
 
     <com.google.android.material.tabs.TabLayout
+        android:layout_marginLeft="20dp"
         android:id="@+id/drink_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -140,6 +141,9 @@
         app:tabIndicatorColor="#4F2E6F"
         app:tabTextColor="#818181"
         app:tabSelectedTextColor="#4F2E6F"
+        app:tabMode="scrollable"
+        app:tabRippleColor="@null"
+
         >
 
         <com.google.android.material.tabs.TabItem
