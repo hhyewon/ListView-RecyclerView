@@ -1,23 +1,22 @@
 package com.example.rp_week3
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.BaseAdapter
-import androidx.core.content.ContextCompat.startActivity
 import com.example.rp_week3.databinding.MyMenuItemBinding
 
 
 class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyMenus>) :
     BaseAdapter() {
 
+
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
 
     lateinit var binding: MyMenuItemBinding
+
 
     override fun getCount(): Int = MyMenuArrayList.size //arraylist size 반환
 
@@ -61,18 +60,33 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
             return MyMenuArrayList[position].checked
         }
 
+
+
+
+
 //        binding.myMenuItemCb.isChecked = MyMenuArrayList[position].checked
 
-        binding.myMenuItemCb.setOnClickListener {
-            val newState: Boolean =
-                !MyMenuArrayList[position].checked //check->uncheck, uncheck -> check로 바꿔 저장
-            MyMenuArrayList[position].checked = newState
+                binding.myMenuItemCb.setOnClickListener {
+                    val newState: Boolean =
+                        !MyMenuArrayList[position].checked //check->uncheck, uncheck -> check로 바꿔 저장
+                    MyMenuArrayList[position].checked = newState
+                }
+
+                binding.myMenuItemCb.isChecked =
+                    isChecked(position) // 그 값을 체크박스에 저장하여 체크된 것들이 그대로 남아있도록 함
+
+                return binding.root
+            }
+
+    fun setAllChecked(ischeked: Boolean) {
+        var count =0
+        count = MyMenuArrayList.size
+        for (i in 0 until count) {
+            MyMenuArrayList[i].checked = ischeked
         }
 
-        binding.myMenuItemCb.isChecked = isChecked(position) // 그 값을 체크박스에 저장하여 체크된 것들이 그대로 남아있도록 함
-
-        return binding.root
     }
 
 
-}
+
+        }

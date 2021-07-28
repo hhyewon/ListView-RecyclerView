@@ -7,7 +7,6 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rp_week3.databinding.MyMenuBinding
-import com.example.rp_week3.databinding.MyMenuItemBinding
 
 
 data class MyMenus(
@@ -22,23 +21,15 @@ class MyMenuActivity : AppCompatActivity() {
 
     var MyMenuArrayList = ArrayList<MyMenus>()
 
-
-    fun isChecked(): Boolean {
-        return false
-    }
-
     private lateinit var customAdapter: CustomAdapter
 
 
     private lateinit var binding: MyMenuBinding
-    private lateinit var binding2: MyMenuItemBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = MyMenuBinding.inflate(layoutInflater)
-        binding2 = MyMenuItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
@@ -222,14 +213,62 @@ class MyMenuActivity : AppCompatActivity() {
 
 
 
-        binding.allCb.setOnClickListener { //전체 선택
-            var count =0
-            count = binding.myMenuLv.adapter.count
-            for (i in 0 until count) {
-                binding.myMenuLv.setItemChecked(i, isChecked())
-            }
-            customAdapter.notifyDataSetChanged();
+        fun isChecked(position: Int): Boolean {  //체크박스 상태
+            return MyMenuArrayList[position].checked
+
         }
+
+//        binding.allCb.setOnClickListener { //전체 선택
+//            var count =0
+//            val newState: Boolean = MyMenuArrayList[count].checked
+//            count = binding.myMenuLv.adapter.count
+//            for (i in 0 until count) {
+//                binding.myMenuLv.setItemChecked(i, true)
+//            }
+//            customAdapter.notifyDataSetChanged();
+//        }
+
+
+
+        binding.allCb.setOnClickListener {
+            customAdapter.setAllChecked(binding.allCb.isChecked)
+            customAdapter.notifyDataSetChanged()
+        }
+
+
+
+
+//        binding.allCb.setOnClickListener {
+//            var size = 0
+//            val isChecked: Boolean = binding.allCb.isChecked
+//            if (isChecked) {
+//                size = MyMenuArrayList.count()
+//                for (i in 0..size) binding.myMenuLv.setItemChecked(i, true)
+//            } else if (!isChecked) {
+//                size = MyMenuArrayList.count()
+//                for (i in 0..size) binding.myMenuLv.setItemChecked(i, false)
+//            }
+//        }
+
+
+//
+//        binding.allCb.setOnClickListener {
+//            var count = 0
+//            count = MyMenuArrayList.size
+//            for (i in 0 until count) {
+//                binding.myMenuLv.setItemChecked(i, true)
+//            }
+//        }
+
+//        binding.allCb.setOnClickListener { //전체 선택
+//            var count =0
+//            count = binding.myMenuLv.adapter.count
+//            for (i in 0 until count) {
+//                binding.myMenuLv.setItemChecked(i, MyMenuArrayList[i].checked)
+//                Log.d("i","i")
+//            }
+//            customAdapter.notifyDataSetChanged();
+//        }
 
     }
 

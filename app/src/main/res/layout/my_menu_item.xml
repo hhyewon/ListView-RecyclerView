@@ -12,6 +12,7 @@
 
 
     <CheckBox
+
         android:layout_margin="1.5dp"
         android:id="@+id/my_menu_item_cb"
         android:layout_width="0dp"
