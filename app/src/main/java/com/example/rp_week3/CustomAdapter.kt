@@ -91,7 +91,6 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
         binding.myMenuItemCb.setOnClickListener {
             val newState: Boolean = !MyMenuArrayList[position].checked //check->uncheck, uncheck -> check로 바꿔 저장
             MyMenuArrayList[position].checked = newState
-
         }
 
 
@@ -105,6 +104,7 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
 //        binding.myMenuItemCb.setOnCheckedChangeListener(isChecked(position))
         return binding.root
     }
+
 
     fun isChecked(position: Int): Boolean {
         return MyMenuArrayList[position].checked
