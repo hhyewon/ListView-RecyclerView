@@ -57,6 +57,7 @@ android:descendantFocusability="blocksDescendants"   //특정 뷰로 포커스�
 ## 그 외 구현한 기능들
 > ListView     
 ### 1. 전체 선택 버튼을 누르면 List Item의 체크박스가 전부 선택 되도록 했다.
+### 2. 리스트뷰의 체크박스를 체크한 후 휴지통 아이콘을 누르면 데이터가 삭제 및 갱신되도록 하였다.
 
 
 
