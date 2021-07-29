@@ -2,6 +2,8 @@ package com.example.rp_week3
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.util.SparseBooleanArray
 import android.view.View
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ListView
@@ -20,6 +22,7 @@ data class MyMenus(
 class MyMenuActivity : AppCompatActivity() {
 
     var MyMenuArrayList = ArrayList<MyMenus>()
+    var item = ArrayList<String>()
 
     private lateinit var customAdapter: CustomAdapter
 
@@ -33,7 +36,6 @@ class MyMenuActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-//        binding2.myMenuItemCb
 
 
         binding.myMenuLv.choiceMode = ListView.CHOICE_MODE_MULTIPLE
@@ -212,12 +214,6 @@ class MyMenuActivity : AppCompatActivity() {
             }
 
 
-
-        fun isChecked(position: Int): Boolean {  //체크박스 상태
-            return MyMenuArrayList[position].checked
-
-        }
-
 //        binding.allCb.setOnClickListener { //전체 선택
 //            var count =0
 //            val newState: Boolean = MyMenuArrayList[count].checked
@@ -229,13 +225,70 @@ class MyMenuActivity : AppCompatActivity() {
 //        }
 
 
-
         binding.allCb.setOnClickListener {
             customAdapter.setAllChecked(binding.allCb.isChecked)
             customAdapter.notifyDataSetChanged()
         }
 
 
+//        binding.myMenuLv.onItemClickListener =
+//            OnItemClickListener { parent, view, position, id ->
+//                val checkedItems = MyMenuArrayList[position]
+//
+
+
+
+        binding.trashCan.setOnClickListener {  //데이터 삭제
+            val checkedItems: SparseBooleanArray = binding.myMenuLv.checkedItemPositions
+//            val checkedItems: SparseBooleanArray? = binding.myMenuLv.checkedItemPositions
+//            checkedItems= customAdapter.isChecked()
+            Log.d("체크", checkedItems.toString())
+            for (i in customAdapter.count - 1 downTo 0) {
+                Log.d("삭제", i.toString())
+                Log.d("선택여부", customAdapter.isChecked(i).toString())
+                if (customAdapter.isChecked(i)) {
+                    MyMenuArrayList.removeAt(i)
+                }
+            }
+            // 모든 선택 상태 초기화.
+            binding.myMenuLv.clearChoices()
+            customAdapter.notifyDataSetChanged()
+        }
+
+//            }
+//        binding.trashCan.setOnClickListener {
+//            val checkedItems: SparseBooleanArray = binding.myMenuLv.checkedItemPositions
+//            val count: Int = customAdapter.count
+//            for (i in count - 1 downTo 0) {
+//                if (checkedItems[i]) {
+//                    MyMenuArrayList.remove()
+//                }
+//            }
+//            // 모든 선택 상태 초기화.
+//            binding.myMenuLv.clearChoices()
+//            customAdapter.notifyDataSetChanged()
+//        }
+//
+//
+//
+//        binding.trashCan.setOnClickListener {
+//            val checked: Int
+//            val count: Int = customAdapter.count
+//            if (count > 0) {
+//                // 현재 선택된 아이템의 position 획득.
+//                checked = binding.myMenuLv.checkedItemPosition
+//                if (checked > -1 && checked < count) {
+//                    // 아이템 삭제
+//                    MyMenuArrayList.removeAt(checked)
+//
+//                    // listview 선택 초기화.
+//                    binding.myMenuLv.clearChoices()
+//
+//                    // listview 갱신.
+//                    customAdapter.notifyDataSetChanged()
+//                }
+//            }
+//        }
 
 
 //        binding.allCb.setOnClickListener {

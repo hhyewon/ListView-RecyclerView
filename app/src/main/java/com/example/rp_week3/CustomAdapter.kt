@@ -1,6 +1,7 @@
 package com.example.rp_week3
 
 import android.content.Context
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,37 +57,43 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
         */
 
 
-        fun isChecked(position: Int): Boolean {  //체크박스 상태
-            return MyMenuArrayList[position].checked
-        }
-
-
-
-
-
 //        binding.myMenuItemCb.isChecked = MyMenuArrayList[position].checked
 
-                binding.myMenuItemCb.setOnClickListener {
-                    val newState: Boolean =
-                        !MyMenuArrayList[position].checked //check->uncheck, uncheck -> check로 바꿔 저장
-                    MyMenuArrayList[position].checked = newState
-                }
+        binding.myMenuItemCb.setOnClickListener {
+            val newState: Boolean =
+                !MyMenuArrayList[position].checked //check->uncheck, uncheck -> check로 바꿔 저장
+            MyMenuArrayList[position].checked = newState
+        }
 
-                binding.myMenuItemCb.isChecked =
-                    isChecked(position) // 그 값을 체크박스에 저장하여 체크된 것들이 그대로 남아있도록 함
+        binding.myMenuItemCb.isChecked =
+            isChecked(position) // 그 값을 체크박스에 저장하여 체크된 것들이 그대로 남아있도록 함
+        return binding.root
+    }
 
-                return binding.root
-            }
+    fun isChecked(position: Int): Boolean {  //체크박스 상태
+        return MyMenuArrayList[position].checked
+    }
+
+
 
     fun setAllChecked(ischeked: Boolean) {
-        var count =0
+        var count = 0
         count = MyMenuArrayList.size
         for (i in 0 until count) {
             MyMenuArrayList[i].checked = ischeked
         }
 
+        fun setDeleted(position: Int){
+            MyMenuArrayList[position].checked
+        }
+
+
     }
 
 
 
-        }
+
+
+
+
+}
