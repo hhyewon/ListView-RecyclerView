@@ -1,7 +1,6 @@
 package com.example.rp_week3
 
 import android.content.Context
-import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +16,9 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
 
 
     lateinit var binding: MyMenuItemBinding
+
+    var dataSet: ArrayList<MyMenus> = arrayListOf()
+
 
 
     override fun getCount(): Int = MyMenuArrayList.size //arraylist size 반환
@@ -41,6 +43,7 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
         binding.myMenuItemName.text = MyMenuArrayList[position].name
         binding.myMenuItemPrice.text = MyMenuArrayList[position].price
         binding.myMenuItemSize.text = MyMenuArrayList[position].size
+        binding.myMenuItemCup.text = MyMenuArrayList[position].cup
         binding.myMenuItemCb.isChecked = MyMenuArrayList[position].checked
 
 
@@ -82,18 +85,16 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
         for (i in 0 until count) {
             MyMenuArrayList[i].checked = ischeked
         }
+    }
 
-        fun setDeleted(position: Int){
-            MyMenuArrayList[position].checked
-        }
-
-
+    fun moveItem(fromPosition: Int, toPosition: Int): Boolean {
+        val text: MyMenus = MyMenuArrayList[fromPosition]
+        MyMenuArrayList.removeAt(fromPosition)
+        MyMenuArrayList.add(toPosition, text)
+        notifyDataSetChanged()
+        return true
     }
 
 
-
-
-
-
-
 }
+

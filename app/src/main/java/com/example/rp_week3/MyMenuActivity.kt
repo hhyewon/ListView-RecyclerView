@@ -1,5 +1,7 @@
 package com.example.rp_week3
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +11,9 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rp_week3.databinding.MyMenuBinding
+import com.google.gson.Gson
+import com.google.gson.JsonParseException
+import com.google.gson.reflect.TypeToken
 
 
 data class MyMenus(
@@ -16,18 +21,57 @@ data class MyMenus(
     val name: String,
     val price: String,
     val size: String,
+    val cup: String,
     var checked: Boolean = false
 )
 
 class MyMenuActivity : AppCompatActivity() {
 
     var MyMenuArrayList = ArrayList<MyMenus>()
-    var item = ArrayList<String>()
 
     private lateinit var customAdapter: CustomAdapter
 
 
     private lateinit var binding: MyMenuBinding
+
+
+    companion object { //SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의
+        public const val KEY_PREFS = "shared_preferences"
+        public const val KEY_DATA = "monster_data"
+    }
+
+    override fun onPause() {
+        super.onPause()
+        customAdapter.notifyDataSetChanged()
+    }
+//    fun a() {
+//        var edit = getSharedPreferences(KEY_PREFS, MODE_PRIVATE).edit()
+//        if (getSharedPreferences(KEY_PREFS, MODE_PRIVATE).getString(KEY_DATA, "no")
+//                .equals("no")
+//        ) {
+//            var gson = Gson()
+//            var json = gson.toJson(MyMenuArrayList)
+//            edit.putString(KEY_DATA, "[]")
+//            edit.apply()
+//        }
+//    }
+
+    private fun loadPref() { //데이터를 불러오는 함수
+        val sharedPreferences = getSharedPreferences(KEY_PREFS, Context.MODE_PRIVATE)
+        if (sharedPreferences.contains(KEY_DATA)) {
+            val gson = Gson()
+            val json = sharedPreferences.getString(KEY_DATA, "")
+            try {  //타입토큰을 적용하여 데이터를 복원
+                val typeToken = object : TypeToken<ArrayList<MyMenus>>() {}.type
+                customAdapter.dataSet = gson.fromJson(json, typeToken)
+
+            } catch (e: JsonParseException) {
+                e.printStackTrace()
+            }
+            Log.d("debug", "Data loaded")
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,48 +79,91 @@ class MyMenuActivity : AppCompatActivity() {
         binding = MyMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-
         binding.myMenuLv.choiceMode = ListView.CHOICE_MODE_MULTIPLE
 
 
+//        binding.plus.setOnClickListener {
+//            customAdapter.notifyDataSetChanged(0, customAdapter.dataSet.size)
+//            val count: Int = customAdapter.count
+//            a()
+//            loadPref()
+//            var edit = getSharedPreferences(KEY_PREFS, MODE_PRIVATE).edit()
+//            var gson = Gson()
+//            var json = gson.toJson(MyMenuArrayList)
+//
+//            // 아이템 추가.
+//            MyMenuArrayList.add(MyMenus)
+//
+//            edit.apply()
+//            // listview 갱신
+//            customAdapter.notifyDataSetChanged()
+//        }
 
-        binding.back.setOnClickListener {
-            intent = Intent(this, MainActivity::class.java)
+        binding.plus.setOnClickListener {
+            intent = Intent(this, AddsActivity::class.java)
             startActivity(intent)
         }
 
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu1,
-                "(S)헤이즐넛 아이스 커피",
-                "5,300원",
-                "Small 일회용컵", false
-            )
-        )
+        binding.bag.setOnClickListener {
+
+
+            loadPref()
+            MyMenuArrayList.add(0, customAdapter.dataSet[0])
+
+            customAdapter.notifyDataSetChanged()
+             //           loadPref() //<< 애 넣어야 되는거아닙니까?제가그러ㅏㅁ 이해한거는 처음에는 이상태였는데 +누르면 저 sp 에있는 리스트로 바꾼다느말이죠 ?
+
+//            Log.d("값 받아옴", customAdapter.dataSet[0].toString())
+//            val count: Int = customAdapter.count
+//            for (i in 0 until count) {
+//                if(MyMenuArrayList.size>0){
+//                    Log.e("bag눌렀을때" , MyMenuArrayList.toString())
+//                    MyMenuArrayList.add(0, customAdapter.dataSet[i])
+//                }
+
+            // }
+//            Log.d("count1", count.toString())
+
+//            customAdapter.notifyDataSetChanged()
+//
+        }
+
+        binding.back.setOnClickListener {
+            // 이렇게 계속 스타트하면 액티비티 스택쌓여서 뒤로가기키누르면 또뜨고또뜨고해용
+
+            finish()
+
+            //여기에요 ?  네!
+        }
+//이거요?
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu16,
-                "블랙다이몬 카페수아(R)",
+                "블랙다이몬 카페수아",
                 "7,000원",
-                "Regular 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu17,
-                "(R)에스프레소 달고나크림라떼",
+                "에스프레소 달고나크림라떼",
                 "5,500원",
-                "Regular 일회용컵", false
+                "Regular",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu18,
-                "(R)아이스 흑임자 크림라떼",
+                "아이스 흑임자 크림라떼",
                 "6,300원",
-                "Regular 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
 
@@ -85,15 +172,19 @@ class MyMenuActivity : AppCompatActivity() {
                 R.drawable.bag_menu2,
                 "스웨디쉬 베리즈",
                 "5,000원",
-                "Regular 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu3,
-                "(R)스파클링 스웨디쉬 레몬티",
+                "스파클링 스웨디쉬 레몬티",
                 "6,300원",
-                "Regular 머그컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
@@ -101,96 +192,110 @@ class MyMenuActivity : AppCompatActivity() {
                 R.drawable.bag_menu4,
                 "(S)잉글리쉬 라떼",
                 "5,800원",
-                "Small 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu5,
-                "(S)아이스 그린티 라떼",
+                "아이스 그린티 라떼",
                 "5,800원",
-                "Small 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu6,
-                "(S)차이라떼",
+                "차이라떼",
                 "5,800원",
-                "Small 머그컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu7,
-                "(S)화이트 포레스트IB",
+                "화이트 포레스트IB",
                 "6,800원",
-                "Small 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu8,
-                "(S)블랙 포레스트IB",
+                "블랙 포레스트IB",
                 "6,800원",
-                "Small 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu9,
-                "(S)베리베리IB",
+                "베리베리IB",
                 "6,800원",
-                "Small 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
 
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu10,
-                "(S)그린티IB",
+                "그린티IB",
                 "6,500원",
-                "Small 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu11,
-                "(S)퓨어 바닐라IB",
+                "퓨어 바닐라IB",
                 "6,000원",
-                "Small 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu12,
-                "(S)핫 바닐라",
+                "핫 바닐라",
                 "5,500원",
-                "Small 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu13,
-                "(S)더블 초코렛",
+                "더블 초코렛",
                 "5,500원",
-                "Small 일회용컵", false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu14,
-                "자몽 쥬스",
-                "4,800원",
-                "Regular 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu15,
-                "딜라이트 피치그린티(R)",
+                "딜라이트 피치그린티",
                 "6,800원",
-                "Regular 일회용컵", false
+                "Small",
+                " 일회용컵",
+                false
             )
         )
 
@@ -199,6 +304,7 @@ class MyMenuActivity : AppCompatActivity() {
         customAdapter = CustomAdapter(this, MyMenuArrayList)
 
         binding.myMenuLv.adapter = customAdapter
+
 
 
         binding.myMenuLv.onItemClickListener =
@@ -223,37 +329,36 @@ class MyMenuActivity : AppCompatActivity() {
 //            }
 //            customAdapter.notifyDataSetChanged();
 //        }
-
-
-        binding.allCb.setOnClickListener {
+        binding.allCb.setOnClickListener { //전체 삭제
             customAdapter.setAllChecked(binding.allCb.isChecked)
             customAdapter.notifyDataSetChanged()
         }
-
-
-//        binding.myMenuLv.onItemClickListener =
-//            OnItemClickListener { parent, view, position, id ->
-//                val checkedItems = MyMenuArrayList[position]
-//
-
 
 
         binding.trashCan.setOnClickListener {  //데이터 삭제
             val checkedItems: SparseBooleanArray = binding.myMenuLv.checkedItemPositions
 //            val checkedItems: SparseBooleanArray? = binding.myMenuLv.checkedItemPositions
 //            checkedItems= customAdapter.isChecked()
-            Log.d("체크", checkedItems.toString())
             for (i in customAdapter.count - 1 downTo 0) {
                 Log.d("삭제", i.toString())
                 Log.d("선택여부", customAdapter.isChecked(i).toString())
                 if (customAdapter.isChecked(i)) {
                     MyMenuArrayList.removeAt(i)
+                    var edit = getSharedPreferences(KEY_PREFS, MODE_PRIVATE).edit()
+                    edit.putString(KEY_DATA, Gson().toJson(ArrayList<MyMenus>()))
+                    edit.apply()
+                    Log.e(
+                        "전체자료리스트 값 ",
+                        getSharedPreferences(KEY_PREFS, MODE_PRIVATE).getString(KEY_DATA, "널").toString()
+                    )
                 }
+
             }
             // 모든 선택 상태 초기화.
             binding.myMenuLv.clearChoices()
             customAdapter.notifyDataSetChanged()
         }
+
 
 //            }
 //        binding.trashCan.setOnClickListener {
@@ -269,28 +374,6 @@ class MyMenuActivity : AppCompatActivity() {
 //            customAdapter.notifyDataSetChanged()
 //        }
 //
-//
-//
-//        binding.trashCan.setOnClickListener {
-//            val checked: Int
-//            val count: Int = customAdapter.count
-//            if (count > 0) {
-//                // 현재 선택된 아이템의 position 획득.
-//                checked = binding.myMenuLv.checkedItemPosition
-//                if (checked > -1 && checked < count) {
-//                    // 아이템 삭제
-//                    MyMenuArrayList.removeAt(checked)
-//
-//                    // listview 선택 초기화.
-//                    binding.myMenuLv.clearChoices()
-//
-//                    // listview 갱신.
-//                    customAdapter.notifyDataSetChanged()
-//                }
-//            }
-//        }
-
-
 //        binding.allCb.setOnClickListener {
 //            var size = 0
 //            val isChecked: Boolean = binding.allCb.isChecked

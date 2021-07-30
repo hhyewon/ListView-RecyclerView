@@ -58,8 +58,20 @@
         android:id="@+id/main_gl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.34" />
+        app:layout_constraintGuide_percent="0.4" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+
+        android:layout_marginHorizontal="20dp"
+        android:background="#dddede"
+        app:layout_constraintBottom_toTopOf="@+id/main_gl"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
     <View
@@ -67,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="30dp"
+        android:layout_marginVertical="37dp"
         app:layout_constraintBottom_toBottomOf="@+id/main_gl"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -77,6 +89,8 @@
         android:id="@+id/main_img"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:paddingRight="10dp"
         android:src="@drawable/bag_menu1"
         app:layout_constraintBottom_toBottomOf="@+id/main_vi"
         app:layout_constraintLeft_toLeftOf="@+id/main_vi"
@@ -91,70 +105,65 @@
         app:layout_constraintLeft_toRightOf="@+id/main_img"
         app:layout_constraintTop_toTopOf="@+id/main_vi">
 
-        <TextView
-            android:id="@+id/main_name1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="("
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/main_size_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="S"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/main_name2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=")"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/main_real_name1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" 헤이즐넛"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/main_tem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" 아이스"
+            android:text=""
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
+
         <TextView
-            android:id="@+id/main_real_name2"
+            android:id="@+id/main_real_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" 커피"
+            android:text="헤이즐넛 아메리카노"
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
+
     </LinearLayout>
 
     <TextView
         android:id="@+id/main_menu_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="5,300원"
         android:textColor="#4F2E6F"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/main_img"
         app:layout_constraintTop_toBottomOf="@+id/main_menu_name" />
+
+    <TextView
+        android:id="@+id/main_menu_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/main_img"
+        app:layout_constraintRight_toLeftOf="@id/main_menu_cup"
+        app:layout_constraintTop_toBottomOf="@+id/main_menu_price" />
+
+    <TextView
+        android:id="@+id/main_menu_cup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/main_menu_size"
+        app:layout_constraintTop_toBottomOf="@+id/main_menu_price" />
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -162,39 +171,54 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/main_vi"
         app:layout_constraintLeft_toRightOf="@+id/main_img"
-        app:layout_constraintTop_toBottomOf="@+id/main_menu_price">
+        app:layout_constraintTop_toBottomOf="@+id/main_menu_cup">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="12dp"
+            android:layout_marginRight="10dp"
             app:cardCornerRadius="5dp">
 
             <TextView
+                android:id="@+id/hot_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:background="@drawable/my_menu_add_selector"
+                android:clickable="true"
+                android:duplicateParentState="true"
+                android:focusable="true"
                 android:gravity="center"
-                android:paddingHorizontal="18dp"
-                android:paddingVertical="11dp"
-                android:text="Hot" />
+                android:paddingHorizontal="20.5dp"
+                android:paddingVertical="12dp"
+                android:text="Hot"
+                android:textColor="#b1b1b1"
+
+                android:textSize="15.5sp" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="5dp"
-            >
+            app:cardCornerRadius="5dp">
 
             <TextView
+                android:id="@+id/ice_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:background="@drawable/my_menu_add_selector"
+                android:clickable="true"
+                android:duplicateParentState="true"
+                android:focusable="true"
                 android:gravity="center"
-                android:paddingHorizontal="18dp"
-                android:paddingVertical="11dp"
-                android:text="Iced" />
+                android:paddingHorizontal="20.5dp"
+                android:paddingVertical="12dp"
+
+                android:text="Iced"
+                android:textColor="#b1b1b1"
+                android:textSize="15.5sp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -206,11 +230,285 @@
         android:id="@+id/gl2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#dddede"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.68"
-        />
+        app:layout_constraintGuide_percent="0.66" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="#dddede"
+        app:layout_constraintBottom_toTopOf="@+id/gl2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="27dp"
+        android:layout_marginVertical="25dp"
+        android:orientation="vertical"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="@+id/gl2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/main_gl">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/size_cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_bb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.26" />
+
+            <TextView
+                android:id="@+id/qq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사이즈"
+                android:textColor="#4F2E6F"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/size_cl"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/size_cl" />
+
+            <LinearLayout
+                android:id="@+id/pp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                app:layout_constraintBottom_toBottomOf="@+id/size_cl"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintLeft_toRightOf="@+id/gl_bb"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/size_cl">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="5dp">
+
+                    <TextView
+                        android:id="@+id/small_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/my_menu_add_selector"
+                        android:clickable="true"
+                        android:duplicateParentState="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:paddingVertical="12dp"
+                        android:text="Small"
+
+                        android:textColor="#b1b1b1"
+                        android:textSize="15.5sp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="5dp"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/regular_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/my_menu_add_selector"
+                        android:clickable="true"
+                        android:duplicateParentState="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:paddingVertical="12dp"
+
+                        android:text="Regular"
+                        android:textColor="#b1b1b1"
+                        android:textSize="15.5sp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="5dp">
+
+                    <TextView
+                        android:id="@+id/large_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/my_menu_add_selector"
+                        android:clickable="true"
+                        android:duplicateParentState="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:paddingVertical="12dp"
+                        android:text="Large"
+                        android:textColor="#b1b1b1"
+                        android:textSize="15.5sp" />
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/size_sel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_bb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.26" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="컵 선택"
+                android:textColor="#4F2E6F"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/size_sel"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/size_sel" />
+
+            <LinearLayout
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:weightSum="3"
+
+                app:layout_constraintBottom_toBottomOf="@+id/size_sel"
+                app:layout_constraintLeft_toRightOf="@+id/gl_bb2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/size_sel">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    app:cardCornerRadius="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/my_menu_add_selector"
+                        android:clickable="true"
+                        android:duplicateParentState="true"
+                        android:focusable="true"
+                        android:gravity="center"
+
+                        android:maxLines="1"
+                        android:paddingVertical="11dp"
+                        android:text="머그컵"
+
+                        android:textColor="#b1b1b1"
+                        android:textSize="15.5sp" />
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="5dp">
+
+                    <TextView
+                        android:id="@+id/mug_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/my_menu_add_selector"
+                        android:clickable="true"
+                        android:duplicateParentState="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:maxLines="1"
+
+                        android:paddingVertical="12dp"
+                        android:text="머그컵"
+                        android:textColor="#b1b1b1"
+                        android:textSize="15.5sp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="5dp"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/il_tv"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/my_menu_add_selector"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:paddingVertical="12dp"
+
+                        android:text="일회용컵"
+                        android:textColor="#b1b1b1"
+                        android:textSize="15.5sp" />
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -218,21 +516,249 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.76" />
+
+        app:layout_constraintGuide_percent="0.77" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="#dddede"
+        app:layout_constraintBottom_toTopOf="@+id/gl3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/personal_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="27sp"
+        android:text="퍼스널옵션 추가하기"
+        android:textColor="#4F2E6F"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/gl3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/gl2" />
+
+    <ImageView
+        android:id="@+id/personal_more"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/personal_more"
+        app:layout_constraintBottom_toBottomOf="@+id/gl3"
+        app:layout_constraintDimensionRatio="1:0.58"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/gl2" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.77" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.89" />
+        app:layout_constraintGuide_percent="0.79" />
+
+    <View
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#f7f7f7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gl5" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bottom_bar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/one_cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="20dp"
+            android:paddingVertical="10dp">
+
+            <LinearLayout
+                android:id="@+id/one_ll1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                app:layout_constraintBottom_toBottomOf="@+id/one_cl"
+                app:layout_constraintLeft_toLeftOf="@+id/one_cl"
+                app:layout_constraintTop_toTopOf="@+id/one_cl"
+                app:layout_constraintVertical_chainStyle="spread">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:text="상품금액"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/my_menu_item_price3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="5,300원"
+                        android:textColor="#4F2E6F"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/plus3" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:text="옵션금액"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="0원"
+                        android:textColor="#4F2E6F"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/one_ll2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/one_cl"
+                app:layout_constraintRight_toRightOf="@+id/one_cl"
+                app:layout_constraintTop_toTopOf="@+id/one_cl"
+                app:layout_constraintVertical_chainStyle="spread">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="총 금액"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/my_menu_item_price2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6,000원"
+                    android:textColor="#4F2E6F"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.9dp"
+                android:layout_height="0dp"
+                android:layout_marginRight="10dp"
+                android:background="#bababa"
+                app:layout_constraintBottom_toBottomOf="@+id/one_cl"
+                app:layout_constraintRight_toLeftOf="@+id/one_ll2"
+                app:layout_constraintTop_toTopOf="@+id/one_cl" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#4F2E6F"
+                app:cardCornerRadius="5dp">
+
+                <TextView
+                    android:id="@+id/add_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:duplicateParentState="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingHorizontal="18dp"
+                    android:paddingVertical="11dp"
+                    android:text="이 옵션으로 저장하기"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

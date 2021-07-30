@@ -19,6 +19,8 @@
         <activity android:name=".MyMenuActivity"></activity>
         <activity android:name=".PurpleOrderActivity"></activity>
         <activity android:name=".ClickActivity"></activity>
+        <activity android:name=".AddActivity"></activity>
+        <activity android:name=".AddsActivity"></activity>
     </application>
 
 </manifest>
