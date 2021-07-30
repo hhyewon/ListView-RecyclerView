@@ -108,7 +108,10 @@ class MyMenuActivity : AppCompatActivity() {
 
 
             loadPref()
-            MyMenuArrayList.add(0, customAdapter.dataSet[0])
+            for (i in 0 until customAdapter.dataSet.size) {
+
+                MyMenuArrayList.add(0, customAdapter.dataSet[i])
+            }
 
             customAdapter.notifyDataSetChanged()
              //           loadPref() //<< 애 넣어야 되는거아닙니까?제가그러ㅏㅁ 이해한거는 처음에는 이상태였는데 +누르면 저 sp 에있는 리스트로 바꾼다느말이죠 ?
