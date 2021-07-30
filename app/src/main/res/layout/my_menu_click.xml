@@ -123,16 +123,33 @@
                 app:layout_constraintTop_toTopOf="@+id/menu_cl" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/my_menu_item_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Small 일회용컵"
+            android:text="Small"
             android:textColor="@color/black"
             android:textSize="15.5sp"
             android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/my_menu_item_cup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text=" 일회용컵"
+                android:textColor="@color/black"
+                android:textSize="15.5sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </LinearLayout>
 
 

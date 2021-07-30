@@ -17,8 +17,6 @@ class MainActivity : AppCompatActivity() {
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         binding.presentVi.setOnClickListener {
             intent= Intent(this, ClickActivity::class.java)
             startActivity(intent)

@@ -2,6 +2,7 @@ package com.example.rp_week3
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -60,6 +61,14 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
         */
 
 
+//        View.OnTouchListener { v, motionEvent ->
+//            if(motionEvent?.action == MotionEvent.ACTION_DOWN){
+//                val
+//            }
+//
+//        }
+
+
 //        binding.myMenuItemCb.isChecked = MyMenuArrayList[position].checked
 
         binding.myMenuItemCb.setOnClickListener {
@@ -77,8 +86,6 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
         return MyMenuArrayList[position].checked
     }
 
-
-
     fun setAllChecked(ischeked: Boolean) {
         var count = 0
         count = MyMenuArrayList.size
@@ -87,14 +94,29 @@ class CustomAdapter(context: Context, private val MyMenuArrayList: ArrayList<MyM
         }
     }
 
-    fun moveItem(fromPosition: Int, toPosition: Int): Boolean {
+    fun moveItem(fromPosition: Int, toPosition: Int) {
         val text: MyMenus = MyMenuArrayList[fromPosition]
-        MyMenuArrayList.removeAt(fromPosition)
-        MyMenuArrayList.add(toPosition, text)
-        notifyDataSetChanged()
-        return true
+        if(fromPosition> toPosition) {
+            MyMenuArrayList.removeAt(fromPosition+1)
+            MyMenuArrayList.add(toPosition, text)
+            notifyDataSetChanged()
+        }else{
+            MyMenuArrayList.removeAt(fromPosition)
+            MyMenuArrayList.add(toPosition+1, text)
+            notifyDataSetChanged()
+        }
     }
 
+
+
+      //원본코드
+//    fun moveItem(fromPosition: Int, toPosition: Int): Boolean {
+//        val text: MyMenus = MyMenuArrayList[fromPosition]
+//        MyMenuArrayList.removeAt(fromPosition)
+//        MyMenuArrayList.add(toPosition, text)
+//        notifyDataSetChanged()
+//        return true
+//    }
 
 }
 

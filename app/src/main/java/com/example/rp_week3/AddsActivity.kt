@@ -31,12 +31,9 @@ class AddsActivity : AppCompatActivity() {
 
 
         binding.back.setOnClickListener {
-            intent = Intent(this, MyMenuActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
-
-        for (i in 0..6) {
             AddArrayList.add(
                 AddMenus(
                     R.drawable.bag_menu1,
@@ -45,14 +42,27 @@ class AddsActivity : AppCompatActivity() {
                 )
             )
             AddArrayList.add(
-
                 AddMenus(
                     R.drawable.bag_menu14,
                     "자몽 쥬스",
                     "4,800원"
                 )
             )
-        }
+            AddArrayList.add(
+                AddMenus(
+                    R.drawable.bag_menu8,
+                    "블랙 포레스트IB",
+                    "6,800원"
+                )
+            )
+        AddArrayList.add(
+            AddMenus(
+                R.drawable.bag_menu3,
+                "스파클링 스웨디쉬 레몬티",
+                "6,300원"
+            )
+        )
+
 
         addsadapter = Addsadapter(this, AddArrayList)
 
@@ -67,6 +77,7 @@ class AddsActivity : AppCompatActivity() {
                 intent.putExtra("add_price", AddArrayList[position].add_price)
 
                 startActivity(intent)
+                finish()
             }
 
 

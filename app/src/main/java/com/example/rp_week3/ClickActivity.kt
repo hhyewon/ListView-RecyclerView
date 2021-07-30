@@ -27,6 +27,7 @@ class ClickActivity :AppCompatActivity() {
         binding.myMenuItemPrice.text = intent.getStringExtra("price")
         binding.myMenuItemSize.text= intent.getStringExtra("size")
         binding.myMenuItemPrice2.text=intent.getStringExtra("price")
+        binding.myMenuItemCup.text=intent.getStringExtra("cup")
 
 
     }

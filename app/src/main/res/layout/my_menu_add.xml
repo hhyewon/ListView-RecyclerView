@@ -140,6 +140,7 @@
         app:layout_constraintTop_toBottomOf="@+id/main_menu_name" />
 
     <TextView
+        android:layout_marginVertical="10dp"
         android:id="@+id/main_menu_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -148,11 +149,13 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tem_ll"
         app:layout_constraintLeft_toRightOf="@+id/main_img"
         app:layout_constraintRight_toLeftOf="@id/main_menu_cup"
         app:layout_constraintTop_toBottomOf="@+id/main_menu_price" />
 
     <TextView
+        android:layout_marginVertical="10dp"
         android:id="@+id/main_menu_cup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -161,11 +164,13 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tem_ll"
         app:layout_constraintLeft_toRightOf="@+id/main_menu_size"
         app:layout_constraintTop_toBottomOf="@+id/main_menu_price" />
 
 
     <LinearLayout
+        android:id="@+id/tem_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -190,7 +195,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:paddingHorizontal="20.5dp"
-                android:paddingVertical="12dp"
+                android:paddingVertical="11dp"
                 android:text="Hot"
                 android:textColor="#b1b1b1"
 
@@ -214,7 +219,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:paddingHorizontal="20.5dp"
-                android:paddingVertical="12dp"
+                android:paddingVertical="11dp"
 
                 android:text="Iced"
                 android:textColor="#b1b1b1"

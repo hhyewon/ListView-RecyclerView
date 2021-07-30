@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken
 
 
 class AddActivity : AppCompatActivity() {
-    
+
     private fun savePref() {  //데이터를 저장하는 함수
         val sharedPreferences =
             getSharedPreferences(MyMenuActivity.KEY_PREFS, Activity.MODE_PRIVATE)
@@ -60,6 +60,7 @@ class AddActivity : AppCompatActivity() {
         binding.back.setOnClickListener {
             intent = Intent(this, AddsActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.mainRealName.text = intent.getStringExtra("add_name")
@@ -118,6 +119,7 @@ class AddActivity : AppCompatActivity() {
             Log.d("a", q)
             savePref()
             finish()
+
         }
     }
 

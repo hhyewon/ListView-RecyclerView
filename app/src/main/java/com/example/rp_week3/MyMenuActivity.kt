@@ -31,9 +31,7 @@ class MyMenuActivity : AppCompatActivity() {
 
     private lateinit var customAdapter: CustomAdapter
 
-
     private lateinit var binding: MyMenuBinding
-
 
     companion object { //SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의
         public const val KEY_PREFS = "shared_preferences"
@@ -90,200 +88,26 @@ class MyMenuActivity : AppCompatActivity() {
 
         binding.myMenuLv.choiceMode = ListView.CHOICE_MODE_MULTIPLE
 
+        customAdapter = CustomAdapter(this, MyMenuArrayList)
+
+        binding.myMenuLv.adapter = customAdapter
+
         binding.plus.setOnClickListener {
             intent = Intent(this, AddsActivity::class.java)
             startActivity(intent)
         }
 
-
-
-
         binding.bag.setOnClickListener {
-
             loadPref()
             for (i in 0 until customAdapter.dataSet.size) {
-
                 MyMenuArrayList.add(0, customAdapter.dataSet[i])
             }
-
             customAdapter.notifyDataSetChanged()
-
         }
 
         binding.back.setOnClickListener {
             finish()
         }
-
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu16,
-                "블랙다이몬 카페수아",
-                "7,000원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu17,
-                "에스프레소 달고나크림라떼",
-                "5,500원",
-                "Regular",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu18,
-                "아이스 흑임자 크림라떼",
-                "6,300원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu2,
-                "스웨디쉬 베리즈",
-                "5,000원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu3,
-                "스파클링 스웨디쉬 레몬티",
-                "6,300원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu4,
-                "(S)잉글리쉬 라떼",
-                "5,800원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu5,
-                "아이스 그린티 라떼",
-                "5,800원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu6,
-                "차이라떼",
-                "5,800원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu7,
-                "화이트 포레스트IB",
-                "6,800원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu8,
-                "블랙 포레스트IB",
-                "6,800원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu9,
-                "베리베리IB",
-                "6,800원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu10,
-                "그린티IB",
-                "6,500원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu11,
-                "퓨어 바닐라IB",
-                "6,000원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu12,
-                "핫 바닐라",
-                "5,500원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu13,
-                "더블 초코렛",
-                "5,500원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu15,
-                "딜라이트 피치그린티",
-                "6,800원",
-                "Small",
-                " 일회용컵",
-                false
-            )
-        )
-
-
-
-        customAdapter = CustomAdapter(this, MyMenuArrayList)
-
-        binding.myMenuLv.adapter = customAdapter
-
-
 
         binding.myMenuLv.onItemClickListener =
             OnItemClickListener { parent, view, position: Int, id -> // 상세정보 화면으로 이동하기(인텐트 날리기)
@@ -293,25 +117,15 @@ class MyMenuActivity : AppCompatActivity() {
                 intent.putExtra("img", MyMenuArrayList[position].img)
                 intent.putExtra("price", MyMenuArrayList[position].price)
                 intent.putExtra("size", MyMenuArrayList[position].size)
+                intent.putExtra("cup",MyMenuArrayList[position].cup)
 
                 startActivity(intent)
             }
 
-
-//        binding.allCb.setOnClickListener { //전체 선택
-//            var count =0
-//            val newState: Boolean = MyMenuArrayList[count].checked
-//            count = binding.myMenuLv.adapter.count
-//            for (i in 0 until count) {
-//                binding.myMenuLv.setItemChecked(i, true)
-//            }
-//            customAdapter.notifyDataSetChanged();
-//        }
         binding.allCb.setOnClickListener { //전체 삭제
             customAdapter.setAllChecked(binding.allCb.isChecked)
             customAdapter.notifyDataSetChanged()
         }
-
 
         binding.trashCan.setOnClickListener {  //데이터 삭제
             val checkedItems: SparseBooleanArray = binding.myMenuLv.checkedItemPositions
@@ -328,13 +142,28 @@ class MyMenuActivity : AppCompatActivity() {
                         getSharedPreferences(KEY_PREFS, MODE_PRIVATE).getString(KEY_DATA, "널").toString()
                     )
                 }
-
             }
             // 모든 선택 상태 초기화.
             binding.myMenuLv.clearChoices()
             customAdapter.notifyDataSetChanged()
         }
 
+        binding.lvSwipe.setOnRefreshListener {
+            customAdapter.notifyDataSetChanged()
+
+            binding.lvSwipe.isRefreshing=false
+        }
+
+
+//        binding.allCb.setOnClickListener { //전체 선택
+//            var count =0
+//            val newState: Boolean = MyMenuArrayList[count].checked
+//            count = binding.myMenuLv.adapter.count
+//            for (i in 0 until count) {
+//                binding.myMenuLv.setItemChecked(i, true)
+//            }
+//            customAdapter.notifyDataSetChanged();
+//        }
 
 //            }
 //        binding.trashCan.setOnClickListener {
@@ -382,6 +211,170 @@ class MyMenuActivity : AppCompatActivity() {
 //            customAdapter.notifyDataSetChanged();
 //        }
 
+
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu16,
+                "블랙다이몬 카페수아",
+                "7,000원",
+                "Small",
+                " 일회용컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu17,
+                "에스프레소 달고나크림라떼",
+                "5,500원",
+                "Regular",
+                " 머그컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu18,
+                "아이스 흑임자 크림라떼",
+                "6,300원",
+                "Large",
+                " 일회용컵",
+                false
+            )
+        )
+
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu2,
+                "스웨디쉬 베리즈",
+                "5,000원",
+                "Small",
+                " 일회용컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu3,
+                "스파클링 스웨디쉬 레몬티",
+                "6,300원",
+                "Regular",
+                " 머그컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu4,
+                "(S)잉글리쉬 라떼",
+                "5,800원",
+                "Small",
+                " 일회용컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu5,
+                "아이스 그린티 라떼",
+                "5,800원",
+                "Large",
+                " 머그컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu6,
+                "차이라떼",
+                "5,800원",
+                "Small",
+                " 일회용컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu7,
+                "화이트 포레스트IB",
+                "6,800원",
+                "Small",
+                " 일회용컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu8,
+                "블랙 포레스트IB",
+                "6,800원",
+                "Regular",
+                " 머그컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu9,
+                "베리베리IB",
+                "6,800원",
+                "Small",
+                " 일회용컵",
+                false
+            )
+        )
+
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu10,
+                "그린티IB",
+                "6,500원",
+                "Regular",
+                " 머그컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu11,
+                "퓨어 바닐라IB",
+                "6,000원",
+                "Small",
+                " 일회용컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu12,
+                "핫 바닐라",
+                "5,500원",
+                "Small",
+                " 일회용컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu13,
+                "더블 초코렛",
+                "5,500원",
+                "Regular",
+                " 머그컵",
+                false
+            )
+        )
+        MyMenuArrayList.add(
+            MyMenus(
+                R.drawable.bag_menu15,
+                "딜라이트 피치그린티",
+                "6,800원",
+                "Small",
+                " 일회용컵",
+                false
+            )
+        )
+
     }
 
 
@@ -396,5 +389,6 @@ class MyMenuActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         savePref()
+        customAdapter.notifyDataSetChanged()
     }
 }
