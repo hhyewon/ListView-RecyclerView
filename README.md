@@ -60,4 +60,12 @@ android:descendantFocusability="blocksDescendants"   //특정 뷰로 포커스�
 #### 2. 리스트뷰의 체크박스를 체크한 후 휴지통 아이콘을 누르면 데이터가 삭제 및 갱신되도록 하였다.
 
 
+## 참고자료
+-
+-
+-
+-
+-
+-
+-
 
