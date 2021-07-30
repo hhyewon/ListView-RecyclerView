@@ -28,6 +28,7 @@ class AddActivity : AppCompatActivity() {
 
         } else {
             mymenu.add(
+                0,
                 MyMenus(
                     intent.getIntExtra("add_img", 0),
                     binding.mainTem.text.toString()
@@ -44,6 +45,8 @@ class AddActivity : AppCompatActivity() {
             editor.putString(MyMenuActivity.KEY_DATA, json)
             editor.apply()
             Log.d("debug", "Data saved")
+
+            //여기서 저장이 된거죠 네 밑에 보시다 시피,,
         }
 
 

@@ -62,8 +62,6 @@ class AddsActivity : AppCompatActivity() {
                 "6,300원"
             )
         )
-
-
         addsadapter = Addsadapter(this, AddArrayList)
 
         binding.addLv.adapter = addsadapter

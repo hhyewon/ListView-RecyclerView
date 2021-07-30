@@ -99,7 +99,6 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
     }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -119,48 +118,52 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
 
         binding.bag.setOnClickListener {
             loadPref()
-            for (i in 0 until customAdapter.dataSet.size) {
-                MyMenuArrayList.add(0, customAdapter.dataSet[i])
-            }
+//            for (i in 0 until customAdapter.dataSet.size) {
+                MyMenuArrayList.add(0, customAdapter.dataSet[0])
+//            }
             customAdapter.notifyDataSetChanged()
         }
+
+        loadPref()
+        for (i in 0 until customAdapter.dataSet.size) {
+            MyMenuArrayList.add(0, customAdapter.dataSet[i])
+        }
+        customAdapter.notifyDataSetChanged()
 
         binding.back.setOnClickListener {
             finish()
         }
 
 
-            binding.myMenuLv.setOnItemLongClickListener { parent, v, position, id ->
-                // Create a new ClipData.
-                // This is done in two steps to provide clarity. The convenience method
-                // ClipData.newPlainText() can create a plain text ClipData in one step.
+        binding.myMenuLv.setOnItemLongClickListener { parent, v, position, id ->
+            // Create a new ClipData.
+            // This is done in two steps to provide clarity. The convenience method
+            // ClipData.newPlainText() can create a plain text ClipData in one step.
 
-                // Create a new ClipData.Item from the ImageView object's tag
-                val item = ClipData.Item(v.tag as? CharSequence)
+            // Create a new ClipData.Item from the ImageView object's tag
+            val item = ClipData.Item(v.tag as? CharSequence)
 
-                // Create a new ClipData using the tag as a label, the plain text MIME type, and
-                // the already-created item. This will create a new ClipDescription object within the
-                // ClipData, and set its MIME type entry to "text/plain"
-                val dragData = ClipData(
-                    v.tag as? CharSequence,
-                    arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
-                    item)
+            // Create a new ClipData using the tag as a label, the plain text MIME type, and
+            // the already-created item. This will create a new ClipDescription object within the
+            // ClipData, and set its MIME type entry to "text/plain"
+            val dragData = ClipData(
+                v.tag as? CharSequence,
+                arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
+                item
+            )
 
-                // Instantiates the drag shadow builder.
-                val myShadow = CustomAdapter.MyDragShadowBuilder(v)
+            // Instantiates the drag shadow builder.
+            val myShadow = CustomAdapter.MyDragShadowBuilder(v)
 
-                // Starts the drag
-                v.startDrag(
-                    dragData,   // the data to be dragged
-                    myShadow,   // the drag shadow builder
-                    null,       // no need to use local data
-                    0           // flags (not currently used, set to 0)
-                )
+            // Starts the drag
+            v.startDrag(
+                dragData,   // the data to be dragged
+                myShadow,   // the drag shadow builder
+                null,       // no need to use local data
+                0           // flags (not currently used, set to 0)
+            )
 
-            }
-
-
-
+        }
 
 
 //        binding.myMenuLv.onItemClickListener =
@@ -193,7 +196,8 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
                     edit.apply()
                     Log.e(
                         "전체자료리스트 값 ",
-                        getSharedPreferences(KEY_PREFS, MODE_PRIVATE).getString(KEY_DATA, "널").toString()
+                        getSharedPreferences(KEY_PREFS, MODE_PRIVATE).getString(KEY_DATA, "널")
+                            .toString()
                     )
                 }
             }
@@ -218,9 +222,6 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
 //
 //            }
 //}
-
-
-
 
 
 //        binding.allCb.setOnClickListener { //전체 선택
@@ -453,10 +454,4 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
         }
     }
 
-
-    override fun onStop() {
-        super.onStop()
-        savePref()
-        customAdapter.notifyDataSetChanged()
-    }
 }
