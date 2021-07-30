@@ -72,6 +72,15 @@ class MyMenuActivity : AppCompatActivity() {
         }
     }
 
+    private fun savePref() {
+        val sharedPreferences = getSharedPreferences(KEY_PREFS, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json = gson.toJson(customAdapter.dataSet)
+        editor.putString(KEY_DATA, json)
+        editor.apply()
+        Log.d("debug", "Data saved")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,31 +90,15 @@ class MyMenuActivity : AppCompatActivity() {
 
         binding.myMenuLv.choiceMode = ListView.CHOICE_MODE_MULTIPLE
 
-
-//        binding.plus.setOnClickListener {
-//            customAdapter.notifyDataSetChanged(0, customAdapter.dataSet.size)
-//            val count: Int = customAdapter.count
-//            a()
-//            loadPref()
-//            var edit = getSharedPreferences(KEY_PREFS, MODE_PRIVATE).edit()
-//            var gson = Gson()
-//            var json = gson.toJson(MyMenuArrayList)
-//
-//            // 아이템 추가.
-//            MyMenuArrayList.add(MyMenus)
-//
-//            edit.apply()
-//            // listview 갱신
-//            customAdapter.notifyDataSetChanged()
-//        }
-
         binding.plus.setOnClickListener {
             intent = Intent(this, AddsActivity::class.java)
             startActivity(intent)
         }
 
-        binding.bag.setOnClickListener {
 
+
+
+        binding.bag.setOnClickListener {
 
             loadPref()
             for (i in 0 until customAdapter.dataSet.size) {
@@ -114,31 +107,13 @@ class MyMenuActivity : AppCompatActivity() {
             }
 
             customAdapter.notifyDataSetChanged()
-             //           loadPref() //<< 애 넣어야 되는거아닙니까?제가그러ㅏㅁ 이해한거는 처음에는 이상태였는데 +누르면 저 sp 에있는 리스트로 바꾼다느말이죠 ?
 
-//            Log.d("값 받아옴", customAdapter.dataSet[0].toString())
-//            val count: Int = customAdapter.count
-//            for (i in 0 until count) {
-//                if(MyMenuArrayList.size>0){
-//                    Log.e("bag눌렀을때" , MyMenuArrayList.toString())
-//                    MyMenuArrayList.add(0, customAdapter.dataSet[i])
-//                }
-
-            // }
-//            Log.d("count1", count.toString())
-
-//            customAdapter.notifyDataSetChanged()
-//
         }
 
         binding.back.setOnClickListener {
-            // 이렇게 계속 스타트하면 액티비티 스택쌓여서 뒤로가기키누르면 또뜨고또뜨고해용
-
             finish()
-
-            //여기에요 ?  네!
         }
-//이거요?
+
         MyMenuArrayList.add(
             MyMenus(
                 R.drawable.bag_menu16,
@@ -340,8 +315,6 @@ class MyMenuActivity : AppCompatActivity() {
 
         binding.trashCan.setOnClickListener {  //데이터 삭제
             val checkedItems: SparseBooleanArray = binding.myMenuLv.checkedItemPositions
-//            val checkedItems: SparseBooleanArray? = binding.myMenuLv.checkedItemPositions
-//            checkedItems= customAdapter.isChecked()
             for (i in customAdapter.count - 1 downTo 0) {
                 Log.d("삭제", i.toString())
                 Log.d("선택여부", customAdapter.isChecked(i).toString())
@@ -417,5 +390,11 @@ class MyMenuActivity : AppCompatActivity() {
         if (hasFocus) {
             window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
         }
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        savePref()
     }
 }
