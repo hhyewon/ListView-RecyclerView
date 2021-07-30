@@ -1,14 +1,12 @@
 package com.example.rp_week3
 
-import android.app.Activity
+import android.content.ClipData
+import android.content.ClipDescription
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.util.SparseBooleanArray
 import android.view.View
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rp_week3.databinding.MyMenuBinding
 import com.google.gson.Gson
@@ -25,7 +23,12 @@ data class MyMenus(
     var checked: Boolean = false
 )
 
-class MyMenuActivity : AppCompatActivity() {
+interface OnItemDrop {
+    fun onDrop(fromIdx: Int, toIdx: Int)
+}
+
+class MyMenuActivity : AppCompatActivity(), OnItemDrop {
+
 
     var MyMenuArrayList = ArrayList<MyMenus>()
 
@@ -42,6 +45,21 @@ class MyMenuActivity : AppCompatActivity() {
         super.onPause()
         customAdapter.notifyDataSetChanged()
     }
+
+    override fun onDrop(fromIdx: Int, toIdx: Int) {
+        if (fromIdx > toIdx) {
+            MyMenuArrayList.add(toIdx, MyMenuArrayList[fromIdx])
+            MyMenuArrayList.removeAt(fromIdx + 1)
+
+            customAdapter.notifyDataSetChanged()
+        } else {
+            MyMenuArrayList.add(toIdx + 1, MyMenuArrayList[fromIdx])
+            MyMenuArrayList.removeAt(fromIdx)
+        }
+        customAdapter.notifyDataSetChanged()
+
+    }
+
 //    fun a() {
 //        var edit = getSharedPreferences(KEY_PREFS, MODE_PRIVATE).edit()
 //        if (getSharedPreferences(KEY_PREFS, MODE_PRIVATE).getString(KEY_DATA, "no")
@@ -80,15 +98,17 @@ class MyMenuActivity : AppCompatActivity() {
         Log.d("debug", "Data saved")
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = MyMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.myMenuLv.choiceMode = ListView.CHOICE_MODE_MULTIPLE
+//        binding.myMenuLv.choiceMode = ListView.CHOICE_MODE_MULTIPLE
 
-        customAdapter = CustomAdapter(this, MyMenuArrayList)
+        customAdapter = CustomAdapter(this, MyMenuArrayList, this)
 
         binding.myMenuLv.adapter = customAdapter
 
@@ -109,18 +129,52 @@ class MyMenuActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.myMenuLv.onItemClickListener =
-            OnItemClickListener { parent, view, position: Int, id -> // 상세정보 화면으로 이동하기(인텐트 날리기)
-                intent = Intent(this, ClickActivity::class.java)
 
-                intent.putExtra("name", MyMenuArrayList[position].name)
-                intent.putExtra("img", MyMenuArrayList[position].img)
-                intent.putExtra("price", MyMenuArrayList[position].price)
-                intent.putExtra("size", MyMenuArrayList[position].size)
-                intent.putExtra("cup",MyMenuArrayList[position].cup)
+            binding.myMenuLv.setOnItemLongClickListener { parent, v, position, id ->
+                // Create a new ClipData.
+                // This is done in two steps to provide clarity. The convenience method
+                // ClipData.newPlainText() can create a plain text ClipData in one step.
 
-                startActivity(intent)
+                // Create a new ClipData.Item from the ImageView object's tag
+                val item = ClipData.Item(v.tag as? CharSequence)
+
+                // Create a new ClipData using the tag as a label, the plain text MIME type, and
+                // the already-created item. This will create a new ClipDescription object within the
+                // ClipData, and set its MIME type entry to "text/plain"
+                val dragData = ClipData(
+                    v.tag as? CharSequence,
+                    arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
+                    item)
+
+                // Instantiates the drag shadow builder.
+                val myShadow = CustomAdapter.MyDragShadowBuilder(v)
+
+                // Starts the drag
+                v.startDrag(
+                    dragData,   // the data to be dragged
+                    myShadow,   // the drag shadow builder
+                    null,       // no need to use local data
+                    0           // flags (not currently used, set to 0)
+                )
+
             }
+
+
+
+
+
+//        binding.myMenuLv.onItemClickListener =
+//            OnItemClickListener { parent, view, position: Int, id -> // 상세정보 화면으로 이동하기(인텐트 날리기)
+//                intent = Intent(this, ClickActivity::class.java)
+//
+//                intent.putExtra("name", MyMenuArrayList[position].name)
+//                intent.putExtra("img", MyMenuArrayList[position].img)
+//                intent.putExtra("price", MyMenuArrayList[position].price)
+//                intent.putExtra("size", MyMenuArrayList[position].size)
+//                intent.putExtra("cup",MyMenuArrayList[position].cup)
+//
+//                startActivity(intent)
+//            }
 
         binding.allCb.setOnClickListener { //전체 삭제
             customAdapter.setAllChecked(binding.allCb.isChecked)
@@ -128,7 +182,7 @@ class MyMenuActivity : AppCompatActivity() {
         }
 
         binding.trashCan.setOnClickListener {  //데이터 삭제
-            val checkedItems: SparseBooleanArray = binding.myMenuLv.checkedItemPositions
+//            val checkedItems: SparseBooleanArray = binding.myMenuLv.checkedItemPositions
             for (i in customAdapter.count - 1 downTo 0) {
                 Log.d("삭제", i.toString())
                 Log.d("선택여부", customAdapter.isChecked(i).toString())
@@ -148,11 +202,25 @@ class MyMenuActivity : AppCompatActivity() {
             customAdapter.notifyDataSetChanged()
         }
 
-        binding.lvSwipe.setOnRefreshListener {
-            customAdapter.notifyDataSetChanged()
+//        binding.lvSwipe.setOnRefreshListener {  //스와이프
+//            customAdapter.notifyDataSetChanged()
+//
+//            binding.lvSwipe.isRefreshing=false
+//        }
 
-            binding.lvSwipe.isRefreshing=false
-        }
+//        binding.myMenuLv.touchLi =
+//        SetOnTouchListener { v, motionEvent ->
+//            if(motionEvent?.action == MotionEvent.ACTION_DOWN){
+//                val dragShadowBuilder = CustomAdapter.MyDragShadowBuilder(v)
+//
+//                val dragData = customAdapter.touch()
+//                v?.startDrag(dragData, CustomAdapter.MyDragShadowBuilder,v,0)
+//
+//            }
+//}
+
+
+
 
 
 //        binding.allCb.setOnClickListener { //전체 선택
