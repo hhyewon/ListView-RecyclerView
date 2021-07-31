@@ -50,15 +50,54 @@ override fun getView(position: Int, convertView: View?, parent: ViewGroup?): Vie
 **my_menu_item.xml**
 
 android:descendantFocusability="blocksDescendants"   //특정 뷰로 포커스되는 현상을 막아준다.
+
+```
+
+### 3. 액티비티 나갔다 들어와도 리스트 상태 유지하기
+  - **문제 🤦‍ |** 액티비티를 나갔다 들어오면 데이터는 그대로이나 목록에 추가된 리스트들이 안보이는 문제 발생
+  - **원인 💁‍ |** 해당 액티비티를 실행할 때마다 데이터를 load 및 add 해주는 코드의 부재
+  - **해결 🙆‍ |** 다음과 같이 코드를 작성하여 해결 !
+```
+**CustomAdapter.kr**
+
+    override fun onPause() {
+        super.onPause()
+        customAdapter.notifyDataSetChanged()  // 화면을 나갈 때마다 데이터 저장하기
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        loadPref()  // 저장된 배열 불러오기
+        for (i in 0 until customAdapter.dataSet.size) { // 배열에 저장되어있는 크기만큼 불러오기
+            MyMenuArrayList.add(0, customAdapter.dataSet[i])
+        }
+        customAdapter.notifyDataSetChanged() // 데이터 상태
+    }
 ```
 
 
 
-## 그 외 구현한 기능들
+## 구현한 기능들
 > ListView     
-#### 1. 전체 선택 버튼을 누르면 List Item의 체크박스가 전부 선택 되도록 했다.
-#### 2. 리스트뷰의 체크박스를 체크한 후 휴지통 아이콘을 누르면 데이터가 삭제 및 갱신되도록 하였다.
+> [앱 동영상](https://user-images.githubusercontent.com/73240332/127738930-c21fd7c4-2114-4c83-8af8-97ed7f68c48f.mp4)
+1. 메인화면에서 나만의 메뉴 들어가기 (액티비티 전환)
+2. 리스트뷰를 스크롤하여 화면 밖으로 나가더라도 **체크박스 상태 유지**
+3. 체크박스 **전체선택 및 해제**
+4. [+] 버튼으로 메뉴 선택 리스트뷰로 이동 (액티비티 전환)
+5. 이동된 리스트뷰에서 **클릭**으로 옵션 선택 액티비티로 이동 (액티비티 전환)
+6. 버튼을 클릭하여 옵션을 지정하면 텍스트 바로 반영
+7. [이 옵션으로 저장하기] 버튼을 눌러 옵션이 **지정한 배열을 저장하고** 나만의 메뉴 액티비티로 다시 이동 (액티비티 전환)
+8. 저장된 배열 **스와이프**로 리스트뷰에 불러오기
+9. **롱클릭**으로 **드래그 앤 드롭 _(포지션 변경)_ **
+10. 액티비티를 나갔다 들어와도 **리스트 및 변경된 포지션 유지**
+11. **클릭**으로 리스트 상세보기 (액티비티 전환)
+12. 휴지통 아이콘 클릭으로 **체크된 리스트뷰 목록 삭제 및 인덱스 순서 갱신**하기 //뒤에서 부터 삭제
++ 13. 다시 들어오면 삭제된 데이터는 리스트에서 사라짐
 
+
+
+## _Detail+
+- 체크박스 커스텀
 
 ## 참고자료
 -
