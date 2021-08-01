@@ -217,6 +217,9 @@ android:descendantFocusability="blocksDescendants"   //특정 뷰로 포커스�
 ## 피드백
 - [startActivityForResult](https://jhshjs.tistory.com/49) 찾아보기
 
+## 수정하고 싶은 부분
+  - 클릭 시 상세 페이지가 나오는데 그 후 뒤로가기를 누르면 나만의 메뉴 페이지가 계속 쌓여있음 ( 뒤로가기를 상세 페이지를 띄운만큼 눌러야 메인 페이지로 가진다. )
+  - 추가된 리스트를 삭제누르면 여태까지 추가했던 데이터들이 모두 삭제 됨 
 
 ## 참고자료
 -
