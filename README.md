@@ -30,6 +30,7 @@ https://user-images.githubusercontent.com/73240332/127762628-b80f9d71-2b75-4d4b-
 12. 휴지통 아이콘 클릭으로 체크된 리스트뷰 목록 삭제 및 인덱스 순서 갱신하기 //뒤에서 부터 삭제
 
 + 13. 다시 들어오면 삭제된 데이터는 리스트에서 사라짐
+
 ```
 #
 ## 📌 App Layout Preview 👀
