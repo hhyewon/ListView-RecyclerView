@@ -59,6 +59,12 @@ https://user-images.githubusercontent.com/73240332/127762628-b80f9d71-2b75-4d4b-
 >> ### _Detail Skill_
 >> - **SharedPreferences**를 사용하여 데이터 저장 
 >>   - SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의하여 사용
+>>   ```
+>>   companion object {
+>>       public const val KEY_PREFS = "shared_preferences"
+>>       public const val KEY_DATA = "monster_data"
+>>       }
+>>   ```
 >> - **Gson**을 활용하여 **Json**을 list로 바꾸기
 >> ```
 >>   val typeToken = object : TypeToken<ArrayList<MyMenus>>() {}.type
@@ -99,7 +105,6 @@ https://user-images.githubusercontent.com/73240332/127762628-b80f9d71-2b75-4d4b-
 >>          binding.iceTv.setBackgroundResource(R.drawable.btn_on) //켜졌을 때 이미지
 >>      }
 >>  }
->>
 >> ```
 
 #
@@ -127,7 +132,6 @@ fun isChecked(position: Int): Boolean {
         
 binding.myMenuItemCb.isChecked = isChecked(position) // 그 값을 체크박스에 저장하여 체크된 것들이 그대로 남아있도록 함
 }
-  
 ```
 #
 ### 2. ListView Item 클릭
@@ -204,7 +208,7 @@ android:descendantFocusability="blocksDescendants"   //특정 뷰로 포커스�
  #
  ### 6. 기기별로 다른 해상도를 고려하여 레이아웃을 구성하기 위해, 전체적인 구성을 ConstraintLayout을 사용하여 제작하였다. 
   - **문제 🤦‍ |** ConstraintLayout을 사용시 레이아웃내의 개별적으로 존재하는 항목(이어져 있지 않는 ..?)을 제작할 때 어려움이 있었다.
-  - **원인 💁‍ |** 
+  - **원인 💁‍ |** Guideline을 몰랐다.
   - **해결 🙆‍ |** Guideline의 layout_constraintGuide_percent 사용하기 ! // 퍼센트로 지정하여서 너무 좋다 !
  ```
 **.xml**
