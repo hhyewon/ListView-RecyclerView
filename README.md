@@ -214,8 +214,8 @@ android:descendantFocusability="blocksDescendants"   //특정 뷰로 포커스�
 #
  
  
-##
-
+## 피드백
+- [startActivityForResult](https://jhshjs.tistory.com/49) 찾아보기
 
 
 ## 참고자료
