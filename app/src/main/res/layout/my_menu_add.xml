@@ -170,6 +170,7 @@
 
 
     <LinearLayout
+        android:weightSum="2"
         android:id="@+id/tem_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -180,47 +181,53 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="7dp"
+            android:layout_weight="1"
+            android:background="@drawable/my_menu_seletor"
+            android:clickable="true"
+            android:duplicateParentState="true"
+            android:focusable="true"
             app:cardCornerRadius="5dp">
 
             <TextView
                 android:id="@+id/hot_tv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="70dp"
+                android:layout_height="43dp"
+                android:background="@drawable/my_menu_seletor"
                 android:layout_gravity="center"
-                android:background="@drawable/my_menu_add_selector"
-                android:clickable="true"
-                android:duplicateParentState="true"
-                android:focusable="true"
                 android:gravity="center"
                 android:paddingHorizontal="20.5dp"
                 android:paddingVertical="11dp"
+                android:tag="false"
                 android:text="Hot"
                 android:textColor="#b1b1b1"
-
                 android:textSize="15.5sp" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="5dp">
+            android:layout_weight="1"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="5dp"
+            android:background="@drawable/my_menu_seletor"
+            android:clickable="true"
+            android:duplicateParentState="true"
+            android:focusable="true"
+            >
 
             <TextView
                 android:id="@+id/ice_tv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="70dp"
+                android:layout_height="43dp"
                 android:layout_gravity="center"
-                android:background="@drawable/my_menu_add_selector"
-                android:clickable="true"
-                android:duplicateParentState="true"
-                android:focusable="true"
+                android:background="@drawable/my_menu_seletor"
                 android:gravity="center"
                 android:paddingHorizontal="20.5dp"
                 android:paddingVertical="11dp"
-
+                android:tag="false"
                 android:text="Iced"
                 android:textColor="#b1b1b1"
                 android:textSize="15.5sp" />
@@ -304,19 +311,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/my_menu_seletor"
+                    android:clickable="true"
+                    android:duplicateParentState="true"
+                    android:focusable="true"
                     android:layout_weight="1"
                     app:cardCornerRadius="5dp">
 
                     <TextView
                         android:id="@+id/small_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="70dp"
+                        android:layout_height="45dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/my_menu_add_selector"
-                        android:clickable="true"
-                        android:duplicateParentState="true"
-                        android:focusable="true"
+                        android:background="@drawable/my_menu_seletor"
+                        android:tag="false"
                         android:gravity="center"
                         android:maxLines="1"
                         android:paddingVertical="12dp"
@@ -331,7 +340,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/my_menu_seletor"
+                    android:clickable="true"
+                    android:duplicateParentState="true"
+                    android:focusable="true"
                     android:layout_weight="1"
                     app:cardCornerRadius="5dp"
 
@@ -339,13 +352,11 @@
 
                     <TextView
                         android:id="@+id/regular_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="70dp"
+                        android:layout_height="45dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/my_menu_add_selector"
-                        android:clickable="true"
-                        android:duplicateParentState="true"
-                        android:focusable="true"
+                        android:background="@drawable/my_menu_seletor"
+                        android:tag="false"
                         android:gravity="center"
                         android:maxLines="1"
                         android:paddingVertical="12dp"
@@ -360,18 +371,20 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:background="@drawable/my_menu_seletor"
+                    android:clickable="true"
+                    android:duplicateParentState="true"
+                    android:focusable="true"
                     android:layout_weight="1"
                     app:cardCornerRadius="5dp">
 
                     <TextView
                         android:id="@+id/large_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="70dp"
+                        android:layout_height="45dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/my_menu_add_selector"
-                        android:clickable="true"
-                        android:duplicateParentState="true"
-                        android:focusable="true"
+                        android:background="@drawable/my_menu_seletor"
+                        android:tag="false"
                         android:gravity="center"
                         android:maxLines="1"
                         android:paddingVertical="12dp"
@@ -429,19 +442,17 @@
 
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="7dp"
                     android:layout_weight="1"
                     android:visibility="invisible"
                     app:cardCornerRadius="5dp">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="70dp"
+                        android:layout_height="45dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/my_menu_add_selector"
-                        android:clickable="true"
-                        android:duplicateParentState="true"
-                        android:focusable="true"
+                        android:background="@drawable/my_menu_seletor"
+                        android:tag="false"
                         android:gravity="center"
 
                         android:maxLines="1"
@@ -459,19 +470,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
+                    android:background="@drawable/my_menu_seletor"
+                    android:clickable="true"
+                    android:duplicateParentState="true"
+                    android:focusable="true"
+                    android:layout_marginRight="7dp"
                     android:layout_weight="1"
                     app:cardCornerRadius="5dp">
 
                     <TextView
                         android:id="@+id/mug_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="70dp"
+                        android:layout_height="45dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/my_menu_add_selector"
-                        android:clickable="true"
-                        android:duplicateParentState="true"
-                        android:focusable="true"
+                        android:background="@drawable/my_menu_seletor"
+                        android:tag="false"
                         android:gravity="center"
                         android:maxLines="1"
 
@@ -487,17 +500,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:background="@drawable/my_menu_seletor"
+                    android:clickable="true"
+                    android:duplicateParentState="true"
+                    android:focusable="true"
                     app:cardCornerRadius="5dp"
 
                     >
 
                     <TextView
                         android:id="@+id/il_tv"
-                        android:layout_width="match_parent"
-
-                        android:layout_height="match_parent"
+                        android:tag="false"
+                        android:layout_width="68dp"
+                        android:layout_height="45dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/my_menu_add_selector"
+                        android:background="@drawable/my_menu_seletor"
                         android:gravity="center"
                         android:maxLines="1"
                         android:paddingVertical="12dp"

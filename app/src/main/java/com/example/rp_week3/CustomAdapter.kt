@@ -3,10 +3,8 @@ package com.example.rp_week3
 import android.content.ClipData
 import android.content.ClipDescription
 import android.content.Context
-import android.graphics.Canvas
+import android.content.Intent
 import android.graphics.Color
-import android.graphics.Point
-import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.*
 import android.widget.BaseAdapter
@@ -19,6 +17,7 @@ class CustomAdapter(
     private val dropCallback: OnItemDrop
 ) :
     BaseAdapter() {
+
 
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -43,6 +42,7 @@ class CustomAdapter(
 //        return view
 
         binding = MyMenuItemBinding.inflate(inflater, parent, false)
+
         binding.myMenuItemIv.setImageResource(MyMenuArrayList[position].img)
         binding.myMenuItemName.text = MyMenuArrayList[position].name
         binding.myMenuItemPrice.text = MyMenuArrayList[position].price
@@ -62,28 +62,41 @@ class CustomAdapter(
             convertView?.context?.startActivity(intent)
         }
         */
+        binding.itemCl.setOnClickListener {
+            var intent = Intent(convertView?.context, ClickActivity::class.java)
+            Log.e("눌리냐?","ㅇㅇ")
 
+            intent.putExtra("name", MyMenuArrayList[position].name)
+            intent.putExtra("img", MyMenuArrayList[position].img)
+            intent.putExtra("price", MyMenuArrayList[position].price)
+            intent.putExtra("size", MyMenuArrayList[position].size)
+            intent.putExtra("cup", MyMenuArrayList[position].cup)
 
-//        View.OnTouchListener { v, motionEvent ->
-//            if(motionEvent?.action == MotionEvent.ACTION_DOWN){
-//                val
-//            }
-//
-//        }
-        binding.itemCl.setOnTouchListener { v, motionEvent ->
-            if (motionEvent?.action == MotionEvent.ACTION_DOWN) {
-                val dragShadowBuilder = MyDragShadowBuilder(v)
-                val item = ClipData.Item(position.toString())   // 드롭된 View에 전달할 드래그중인 view의 인덱스
-                // 전달할 데이터 담아서 인스턴스화
-                val dragData =
-                    ClipData("position", arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN), item)
+            convertView?.context?.startActivity(intent)
 
-                v?.startDrag(dragData, dragShadowBuilder, v, 0)
-                true
-            } else {
-                false
-            }
         }
+        binding.itemCl.setOnLongClickListener { v ->
+//if (longClick){
+            //  if (motionEvent?.action == MotionEvent.ACTION_DOWN) {
+//                    if (flag == 0) {
+            val dragShadowBuilder = MyDragShadowBuilder(v)
+            val item = ClipData.Item(position.toString())   // 드롭된 View에 전달할 드래그중인 view의 인덱스
+            // 전달할 데이터 담아서 인스턴스화
+            val dragData =
+                ClipData("position", arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN), item)
+            //     longClick=false
+
+            v?.startDrag(dragData, dragShadowBuilder, v, 0)
+//                    true
+//                }else{
+//                    flag=0
+//                    }
+            //     longClick=false
+            //  }
+//}
+            false
+        }
+
 
         binding.itemCl.setOnDragListener { v, event ->
             when (event.action) {
@@ -103,6 +116,7 @@ class CustomAdapter(
                 }
                 else -> false
             }
+            true
         }
 
 
@@ -116,6 +130,9 @@ class CustomAdapter(
         binding.myMenuItemCb.isChecked =
             isChecked(position) // 그 값을 체크박스에 저장하여 체크된 것들이 그대로 남아있도록 함
         return binding.root
+
+
+
     }
 
 
@@ -134,10 +151,10 @@ class CustomAdapter(
     class MyDragShadowBuilder(v: View) : View.DragShadowBuilder(v) {
 
 //        private val shadow = ColorDrawable(Color.LTGRAY)
-
-
-        // Defines a callback that sends the drag shadow dimensions and touch point back to the
-        // system. 무슨일ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+//
+//
+////         Defines a callback that sends the drag shadow dimensions and touch point back to the
+////         system.
 //        override fun onProvideShadowMetrics(size: Point, touch: Point) {
 //            // Sets the width of the shadow to half the width of the original View
 //            val width: Int = view.width / 2
@@ -164,95 +181,6 @@ class CustomAdapter(
 //            // Draws the ColorDrawable in the Canvas passed in from the system.
 //            shadow.draw(canvas)
 //        }
-    }
-
-    val dragListen = View.OnDragListener { v, event ->
-
-        // Handles each of the expected events
-        when (event.action) {
-            DragEvent.ACTION_DRAG_STARTED -> {
-                // Determines if this View can accept the dragged data
-                if (event.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                    // As an example of what your application might do,
-                    // applies a blue color tint to the View to indicate that it can accept
-                    // data.
-                    (v as? ImageView)?.setColorFilter(Color.BLUE)
-
-                    // Invalidate the view to force a redraw in the new tint
-                    v.invalidate()
-
-                    // returns true to indicate that the View can accept the dragged data.
-                    true
-                } else {
-                    // Returns false. During the current drag and drop operation, this View will
-                    // not receive events again until ACTION_DRAG_ENDED is sent.
-                    false
-                }
-            }
-            DragEvent.ACTION_DRAG_ENTERED -> {
-                // Applies a green tint to the View. Return true; the return value is ignored.
-                (v as? ImageView)?.setColorFilter(Color.GREEN)
-
-                // Invalidate the view to force a redraw in the new tint
-                v.invalidate()
-                true
-            }
-
-            DragEvent.ACTION_DRAG_LOCATION ->
-                // Ignore the event
-                true
-            DragEvent.ACTION_DRAG_EXITED -> {
-                // Re-sets the color tint to blue. Returns true; the return value is ignored.
-                (v as? ImageView)?.setColorFilter(Color.BLUE)
-
-                // Invalidate the view to force a redraw in the new tint
-                v.invalidate()
-                true
-            }
-            DragEvent.ACTION_DROP -> {
-                // Gets the item containing the dragged data
-                val item: ClipData.Item = event.clipData.getItemAt(0)
-
-                // Gets the text data from the item.
-                val dragData = item.text
-
-                // Displays a message containing the dragged data.
-//                    Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_LONG).show()
-
-                // Turns off any color tints
-                (v as? ImageView)?.clearColorFilter()
-
-                // Invalidates the view to force a redraw
-                v.invalidate()
-
-                // Returns true. DragEvent.getResult() will return true.
-                true
-            }
-
-            DragEvent.ACTION_DRAG_ENDED -> {
-                // Turns off any color tinting
-                (v as? ImageView)?.clearColorFilter()
-
-                // Invalidates the view to force a redraw
-                v.invalidate()
-
-                // Does a getResult(), and displays what happened.
-//                    when(event.result) {
-//                        true ->
-//                            Toast.makeText(this, "The drop was handled.", Toast.LENGTH_LONG)
-//                        else ->
-//                            Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_LONG)
-//                    }.show()
-
-                // returns true; the value is ignored.
-                true
-            }
-            else -> {
-                // An unknown action type was received.
-                Log.e("DragDrop Example", "Unknown action type received by OnDragListener.")
-                false
-            }
-        }
     }
 }
 

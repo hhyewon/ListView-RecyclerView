@@ -7,6 +7,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemLongClickListener
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rp_week3.databinding.MyMenuBinding
 import com.google.gson.Gson
@@ -57,7 +59,6 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
             MyMenuArrayList.removeAt(fromIdx)
         }
         customAdapter.notifyDataSetChanged()
-
     }
 
 //    fun a() {
@@ -88,17 +89,6 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
         }
     }
 
-    private fun savePref() {
-        val sharedPreferences = getSharedPreferences(KEY_PREFS, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        val gson = Gson()
-        val json = gson.toJson(customAdapter.dataSet)
-        editor.putString(KEY_DATA, json)
-        editor.apply()
-        Log.d("debug", "Data saved")
-    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -117,11 +107,7 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
         }
 
         binding.bag.setOnClickListener {
-            loadPref()
-//            for (i in 0 until customAdapter.dataSet.size) {
-                MyMenuArrayList.add(0, customAdapter.dataSet[0])
-//            }
-            customAdapter.notifyDataSetChanged()
+
         }
 
         loadPref()
@@ -135,7 +121,22 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
         }
 
 
+
+//        binding.myMenuLv.setOnItemClickListener { parent, view, position: Int, id ->   // 상세정보 화면으로 이동하기(인텐트 날리기)
+//                intent = Intent(this, ClickActivity::class.java)
+//
+//                intent.putExtra("name", MyMenuArrayList[position].name)
+//                intent.putExtra("img", MyMenuArrayList[position].img)
+//                intent.putExtra("price", MyMenuArrayList[position].price)
+//                intent.putExtra("size", MyMenuArrayList[position].size)
+//                intent.putExtra("cup", MyMenuArrayList[position].cup)
+//
+//                startActivity(intent)
+//
+//            }
+
         binding.myMenuLv.setOnItemLongClickListener { parent, v, position, id ->
+
             // Create a new ClipData.
             // This is done in two steps to provide clarity. The convenience method
             // ClipData.newPlainText() can create a plain text ClipData in one step.
@@ -162,22 +163,11 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
                 null,       // no need to use local data
                 0           // flags (not currently used, set to 0)
             )
-
+            true
         }
 
 
-//        binding.myMenuLv.onItemClickListener =
-//            OnItemClickListener { parent, view, position: Int, id -> // 상세정보 화면으로 이동하기(인텐트 날리기)
-//                intent = Intent(this, ClickActivity::class.java)
-//
-//                intent.putExtra("name", MyMenuArrayList[position].name)
-//                intent.putExtra("img", MyMenuArrayList[position].img)
-//                intent.putExtra("price", MyMenuArrayList[position].price)
-//                intent.putExtra("size", MyMenuArrayList[position].size)
-//                intent.putExtra("cup",MyMenuArrayList[position].cup)
-//
-//                startActivity(intent)
-//            }
+
 
         binding.allCb.setOnClickListener { //전체 삭제
             customAdapter.setAllChecked(binding.allCb.isChecked)
@@ -206,11 +196,18 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
             customAdapter.notifyDataSetChanged()
         }
 
-//        binding.lvSwipe.setOnRefreshListener {  //스와이프
-//            customAdapter.notifyDataSetChanged()
-//
-//            binding.lvSwipe.isRefreshing=false
-//        }
+        binding.lvSwipe.setOnRefreshListener {  //스와이프
+            loadPref()
+//            for (i in 0 until customAdapter.dataSet.size) {
+            if(customAdapter.dataSet[0].equals(MyMenuArrayList[0])){
+
+            }else {
+                MyMenuArrayList.add(0, customAdapter.dataSet[0])
+            }
+//            }
+            customAdapter.notifyDataSetChanged()
+            binding.lvSwipe.isRefreshing = false
+        }
 
 //        binding.myMenuLv.touchLi =
 //        SetOnTouchListener { v, motionEvent ->
@@ -324,16 +321,6 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
         )
         MyMenuArrayList.add(
             MyMenus(
-                R.drawable.bag_menu3,
-                "스파클링 스웨디쉬 레몬티",
-                "6,300원",
-                "Regular",
-                " 머그컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
                 R.drawable.bag_menu4,
                 "(S)잉글리쉬 라떼",
                 "5,800원",
@@ -369,16 +356,6 @@ class MyMenuActivity : AppCompatActivity(), OnItemDrop {
                 "6,800원",
                 "Small",
                 " 일회용컵",
-                false
-            )
-        )
-        MyMenuArrayList.add(
-            MyMenus(
-                R.drawable.bag_menu8,
-                "블랙 포레스트IB",
-                "6,800원",
-                "Regular",
-                " 머그컵",
                 false
             )
         )

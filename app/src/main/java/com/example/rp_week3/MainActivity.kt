@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
-import android.text.SpannableString
 import android.view.View
 import com.example.rp_week3.databinding.ActivityMainBinding
 
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.presentVi.setOnClickListener {
-            intent= Intent(this, ClickActivity::class.java)
+            intent= Intent(this, ReMyMenuActivity::class.java)
             startActivity(intent)
         }
 
