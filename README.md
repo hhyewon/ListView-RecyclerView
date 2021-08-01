@@ -47,7 +47,7 @@ https://user-images.githubusercontent.com/73240332/127762628-b80f9d71-2b75-4d4b-
 ![기능2](https://user-images.githubusercontent.com/73240332/127763773-dcee5aee-335b-49f6-a2f3-7de2da1ecdc7.PNG)
 
 #
-> ### 👩‍💻 _Skill_
+> ## 👩🏻‍💻 _Skill_
 > - 체크박스 상태유지
 > - 전체선택 및 해제
 > - 원하는 데이터 추가 및 체크된 데이터 삭제
