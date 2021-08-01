@@ -1,5 +1,5 @@
 # 📌 Coffee Bean Layout + ListView, RecyclerView Clone Project 
-> 📌 앱 동작 영상 (App scenario 참고)
+> 📌 앱 동작 영상 (🎀 App scenario 참고 🎀)
 
 https://user-images.githubusercontent.com/73240332/127762628-b80f9d71-2b75-4d4b-a9f0-2c716c06a38b.mp4
 
