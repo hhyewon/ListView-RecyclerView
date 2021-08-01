@@ -70,7 +70,7 @@ https://user-images.githubusercontent.com/73240332/127762628-b80f9d71-2b75-4d4b-
 >>   mymenu.add( 
 >>             0,  // 제일 위에 보이게 !
 >>        MyMenus(
->>             //여기에 지금 이화면에서 저장할값을입력
+>>             //여기에 지금 이화면에서 저장할 값을 입력
 >>        )
 >>    )
 >>   var json = gson.toJson(mymenu)
@@ -98,6 +98,7 @@ https://user-images.githubusercontent.com/73240332/127762628-b80f9d71-2b75-4d4b-
 >>          binding.iceTv.setBackgroundResource(R.drawable.btn_on) //켜졌을 때 이미지
 >>      }
 >>  }
+>>
 >> ```
 
 #
@@ -125,6 +126,7 @@ fun isChecked(position: Int): Boolean {
         
 binding.myMenuItemCb.isChecked = isChecked(position) // 그 값을 체크박스에 저장하여 체크된 것들이 그대로 남아있도록 함
 }
+  
 ```
 #
 ### 2. ListView Item 클릭
@@ -135,8 +137,8 @@ binding.myMenuItemCb.isChecked = isChecked(position) // 그 값을 체크박스�
 **CustomAdapter.kr**
 
 override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-...
-
+                   ...
+  
         binding.itemCl.setOnClickListener {
             var intent  = Intent(convertView?.context, ClickActivity::class.java)
             intent.putExtra("name", MyMenuArrayList[position].name)
@@ -146,6 +148,7 @@ override fun getView(position: Int, convertView: View?, parent: ViewGroup?): Vie
             convertView?.context?.startActivity(intent)
         }
 }
+  
 ```
   - **해결 🙆‍ |** **[2]** 루트 레이아웃에 다음과 같은 코드를 추가하여 해결 ! 
 ```
@@ -175,6 +178,7 @@ android:descendantFocusability="blocksDescendants"   //특정 뷰로 포커스�
         }
         customAdapter.notifyDataSetChanged() // 데이터 상태
     }
+  
 ```
 #
  ### 4. 롱클릭과 클릭
@@ -194,6 +198,7 @@ android:descendantFocusability="blocksDescendants"   //특정 뷰로 포커스�
          }else {
             MyMenuArrayList.add(0, customAdapter.dataSet[0])
          }
+  
 ```
  #
  ### 6. 기기별로 다른 해상도를 고려하여 레이아웃을 구성하기 위해, 전체적인 구성을 ConstraintLayout을 사용하여 제작하였다. 
@@ -214,14 +219,14 @@ android:descendantFocusability="blocksDescendants"   //특정 뷰로 포커스�
 #
  
  
-## 피드백
+## 📌 피드백
 - [startActivityForResult](https://jhshjs.tistory.com/49) 찾아보기
 
-## 수정하고 싶은 부분
+## 📌 수정하고 싶은 부분
   - 클릭 시 상세 페이지가 나오는데 그 후 뒤로가기를 누르면 나만의 메뉴 페이지가 계속 쌓여있음 ( 뒤로가기를 상세 페이지를 띄운만큼 눌러야 메인 페이지로 가진다. )
   - 추가된 리스트를 삭제누르면 여태까지 추가했던 데이터들이 모두 삭제 됨 
 
-## 참고자료
+## 📌 참고자료
 -
 -
 -
